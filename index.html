@@ -650,6 +650,66 @@ footer {
 footer strong { color: rgba(250,247,242,0.85); }
 footer a { color: var(--gold); text-decoration: none; }
 
+/* ─── ISSUE SELECTOR ─── */
+.issue-selector {
+  margin-top: 20px;
+  padding: 18px 20px;
+  background: var(--bg-warm);
+  border: 1px solid var(--border-warm);
+  border-radius: 12px;
+}
+.issue-selector-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 12px;
+}
+.issue-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.issue-opt { cursor: pointer; flex: 1; min-width: 90px; }
+.issue-opt input { display: none; }
+.issue-opt-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 10px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  transition: border-color .18s, background .18s;
+  text-align: center;
+}
+.issue-opt input:checked + .issue-opt-inner {
+  border-color: var(--gold);
+  background: var(--gold-light);
+}
+.issue-num {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--fg);
+}
+.issue-note {
+  font-size: 11px;
+  color: var(--fg-muted);
+}
+.issue-note.issue-deal {
+  color: var(--green);
+  font-weight: 600;
+}
+.issue-savings {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--green);
+  font-weight: 600;
+  min-height: 20px;
+}
+
 /* ─── UTILITIES ─── */
 .text-muted { color: var(--fg-muted); }
 .mb-0 { margin-bottom: 0; }
@@ -704,7 +764,7 @@ footer a { color: var(--gold); text-decoration: none; }
   <div class="section-block">
     <div class="section-eyebrow">Step 1</div>
     <h2 class="section-title"><span class="section-num">1</span>Choose your ad size</h2>
-    <p class="section-desc">Print ads in Anna Co-op Magazine, mailed to every home in ZIP 75409. Two-issue minimum.</p>
+    <p class="section-desc">Print ads in Anna Co-op Magazine, mailed to every home in ZIP 75409. Choose one issue or save with a multi-issue contract.</p>
     <div class="card-grid" id="ad-grid">
 
       <label class="option-card" onclick="selectCard(this,'ad')" data-price="100" data-label="Business Card Ad">
@@ -740,6 +800,35 @@ footer a { color: var(--gold); text-decoration: none; }
         <span class="card-badge">Best impact</span>
       </label>
 
+    </div>
+
+    <!-- Issue count selector -->
+    <div class="issue-selector" id="issue-selector" style="display:none;">
+      <div class="issue-selector-label">How many issues?</div>
+      <div class="issue-options">
+        <label class="issue-opt">
+          <input type="radio" name="issues" value="1" checked onchange="setIssues(1)">
+          <span class="issue-opt-inner">
+            <span class="issue-num">1 issue</span>
+            <span class="issue-note">Standard rate</span>
+          </span>
+        </label>
+        <label class="issue-opt">
+          <input type="radio" name="issues" value="3" onchange="setIssues(3)">
+          <span class="issue-opt-inner">
+            <span class="issue-num">3 issues</span>
+            <span class="issue-note issue-deal">Save 10%</span>
+          </span>
+        </label>
+        <label class="issue-opt">
+          <input type="radio" name="issues" value="6" onchange="setIssues(6)">
+          <span class="issue-opt-inner">
+            <span class="issue-num">6 issues</span>
+            <span class="issue-note issue-deal">Save 15%</span>
+          </span>
+        </label>
+      </div>
+      <div class="issue-savings" id="issue-savings"></div>
     </div>
   </div>
 
@@ -938,6 +1027,7 @@ footer a { color: var(--gold); text-decoration: none; }
 /* ─── STATE ─── */
 const state = {
   ad:        { price: 0, label: '' },
+  issues:    1,   // 1 | 3 | 6
   sponsor:   { price: 0, label: '' },
   academy:   false,
   mia:       false,
@@ -955,7 +1045,41 @@ function selectCard(card, group) {
   const price = parseInt(card.dataset.price) || 0;
   const label = card.dataset.label || '';
   state[group] = { price, label };
+  if (group === 'ad') {
+    const sel = document.getElementById('issue-selector');
+    sel.style.display = price > 0 ? '' : 'none';
+    updateSavingsLabel();
+  }
   updateReview();
+}
+
+function setIssues(n) {
+  state.issues = n;
+  updateSavingsLabel();
+  updateReview();
+}
+
+function issueDiscount() {
+  if (state.issues === 3) return 0.10;
+  if (state.issues === 6) return 0.15;
+  return 0;
+}
+
+function adTotal() {
+  const base = state.ad.price * state.issues;
+  return Math.round(base * (1 - issueDiscount()));
+}
+
+function updateSavingsLabel() {
+  const el = document.getElementById('issue-savings');
+  if (!el) return;
+  const disc = issueDiscount();
+  if (disc > 0 && state.ad.price > 0) {
+    const saved = Math.round(state.ad.price * state.issues * disc);
+    el.textContent = `You save ${fmt(saved)} on this contract.`;
+  } else {
+    el.textContent = '';
+  }
 }
 
 function toggleAddon(card) {
@@ -981,7 +1105,7 @@ function changeAffiliate(delta) {
 
 /* ─── TOTALS ─── */
 function calcTotal() {
-  let t = state.ad.price + state.sponsor.price;
+  let t = adTotal() + state.sponsor.price;
   if (state.academy) t += 29;
   t += state.affiliate * 2;
   return t;
@@ -1006,10 +1130,13 @@ function openInvoice() {
   const lines = [];
 
   if (state.ad.price > 0) {
+    const disc = issueDiscount();
+    const issueWord = state.issues === 1 ? '1 issue' : `${state.issues} issues`;
+    const discNote = disc > 0 ? ` · ${disc * 100}% multi-issue discount applied` : '';
     lines.push({
       name: state.ad.label,
-      detail: '× 2 issues (minimum)',
-      amt: state.ad.price * 2,
+      detail: `× ${issueWord}${discNote}`,
+      amt: adTotal(),
     });
   }
   if (state.sponsor.price > 0) {
@@ -1073,7 +1200,6 @@ function openInvoice() {
     document.getElementById('invoice-lines').innerHTML = linesHtml;
   }
 
-  const total = calcTotal() + (state.ad.price > 0 ? state.ad.price : 0); // 2-issue ad total
   const invoiceTotal = calcInvoiceTotal();
   document.getElementById('invoice-total').textContent = fmt(invoiceTotal);
   document.getElementById('square-amount').textContent = fmt(invoiceTotal);
@@ -1084,7 +1210,7 @@ function openInvoice() {
 
 function calcInvoiceTotal() {
   let t = 0;
-  if (state.ad.price > 0)      t += state.ad.price * 2; // two-issue minimum
+  if (state.ad.price > 0)      t += adTotal();
   if (state.sponsor.price > 0) t += state.sponsor.price;
   if (state.academy)            t += 29;
   t += state.affiliate * 2;
@@ -1116,8 +1242,12 @@ function copyOrder() {
   if (phone) txt += `Phone:    ${phone}\n`;
   txt += `\nOrder items:\n`;
 
-  if (state.ad.price > 0)
-    txt += `  • ${state.ad.label} × 2 issues — ${fmt(state.ad.price * 2)}\n`;
+  if (state.ad.price > 0) {
+    const disc = issueDiscount();
+    const issueWord = state.issues === 1 ? '1 issue' : `${state.issues} issues`;
+    const discNote = disc > 0 ? ` (${disc * 100}% off)` : '';
+    txt += `  • ${state.ad.label} × ${issueWord}${discNote} — ${fmt(adTotal())}\n`;
+  }
   if (state.sponsor.price > 0)
     txt += `  • ${state.sponsor.label} — ${fmt(state.sponsor.price)}\n`;
   if (state.academy)
