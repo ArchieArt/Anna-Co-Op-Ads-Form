@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#352D27">
+<title>Thank you · Anna Co-op</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #FAF7F2; --bg-card: #FFFFFF; --bg-warm: #FFF8ED;
+  --fg: #1A1210; --fg-mid: #4A3F39; --fg-muted: #7A6E69;
+  --espresso: #352D27; --gold: #C8922A; --border: #E0D5C8;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #160E0B; --bg-card: #1F1410; --bg-warm: #261A10;
+    --fg: #F5EDE5; --fg-mid: #C8B8AC; --fg-muted: #8A7A72;
+    --espresso: #C8B8AC; --gold: #D4A44A; --border: #3A2A22;
+    color-scheme: dark;
+  }
+}
+html[data-theme="dark"] {
+  --bg: #160E0B; --bg-card: #1F1410; --bg-warm: #261A10;
+  --fg: #F5EDE5; --fg-mid: #C8B8AC; --fg-muted: #8A7A72;
+  --espresso: #C8B8AC; --gold: #D4A44A; --border: #3A2A22;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px; line-height: 1.6; min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+.masthead {
+  background: var(--espresso); color: #FAF7F2;
+  padding: 14px 24px;
+}
+.masthead-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px; font-weight: 900;
+}
+.masthead-name span { color: var(--gold); }
+.wrap {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 48px 20px;
+}
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 40px 32px; max-width: 560px; width: 100%;
+  text-align: center; box-shadow: 0 8px 30px rgba(53,45,39,0.06);
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px;
+}
+h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 5vw, 40px); font-weight: 900; line-height: 1.15;
+  margin-bottom: 14px;
+}
+h1 em { color: var(--gold); font-style: italic; }
+p { color: var(--fg-mid); margin-bottom: 22px; }
+.actions { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+.btn {
+  display: block; text-decoration: none; border-radius: 10px;
+  padding: 14px 20px; font-weight: 600; font-size: 15px;
+}
+.btn-primary { background: var(--gold); color: var(--espresso); }
+.btn-primary:hover { background: #D4A030; }
+.btn-secondary {
+  background: transparent; color: var(--fg);
+  border: 1.5px solid var(--border);
+}
+.next {
+  margin-top: 28px; text-align: left; background: var(--bg-warm);
+  border-radius: 12px; padding: 16px 18px;
+}
+.next h2 {
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--fg-muted); font-weight: 500; margin-bottom: 8px;
+}
+.next ol { padding-left: 18px; color: var(--fg-mid); font-size: 14px; }
+.next li { margin: 4px 0; }
+footer {
+  background: var(--espresso); color: rgba(250,247,242,0.55);
+  text-align: center; padding: 28px 20px; font-size: 12px; line-height: 1.8;
+}
+footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-name">Anna Co-op <span>Magazine</span></div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+    <div class="eyebrow">Received</div>
+    <h1 id="thanks-title">You're in.<br><em>Thank you.</em></h1>
+    <p id="thanks-copy">We received your details. Aubre' will follow up from PRESS@annaartscouncil.org — or book the 20-minute call now.</p>
+    <div class="actions">
+      <a class="btn btn-primary" id="book-btn" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1JVkO3Cqu8W3EDDEq6oYRcVRJHSh7kwfzNW9tZNSPQfhKR9DdlNQSuVrogX6R146IEYmL-5pSG" target="_blank" rel="noopener">Book a 20-min call on Google Calendar</a>
+      <a class="btn btn-secondary" href="tel:9728373179">Call or text 972-837-3179</a>
+      <a class="btn btn-secondary" href="mailto:PRESS@annaartscouncil.org">Email PRESS@annaartscouncil.org</a>
+    </div>
+    <div class="next">
+      <h2>What happens next</h2>
+      <ol>
+        <li>We read what you asked for — SILO Report, audits, Case Studies, logins, Angel Tree, affiliate sets, and your magazine budget.</li>
+        <li>Book the 20-minute call, or wait for Aubre' to reach out.</li>
+        <li>We deliver what you requested and map it to the next holiday issue.</li>
+      </ol>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Anna Co-op Magazine · Anna Arts Council · <a href="mailto:PRESS@annaartscouncil.org">PRESS@annaartscouncil.org</a> · <a href="tel:9728373179">972-837-3179</a><br>
+  <a href="/">Back to the form</a>
+</footer>
+
+<script>
+(function () {
+  const saved = localStorage.getItem('anna-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+
+  const params = new URLSearchParams(location.search);
+  const name = params.get('business');
+  if (name) {
+    document.getElementById('thanks-title').innerHTML = 'You\'re in, ' + escapeHtml(name) + '.<br><em>Thank you.</em>';
+    document.getElementById('thanks-copy').textContent = 'We received your details. Aubre\' will follow up from PRESS@annaartscouncil.org — or book the 20-minute call now.';
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
+  }
+})();
+</script>
+</body>
+</html>

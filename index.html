@@ -723,10 +723,8 @@ document.getElementById('lead-form').addEventListener('submit', async (e) => {
     console.warn('Remote send failed; answers saved locally', err);
   }
 
-  document.getElementById('lead-form').style.display = 'none';
-  document.getElementById('success').style.display = 'block';
-  showToast('Received — thank you');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const business = encodeURIComponent(data.business || '');
+  window.location.href = '/thank-you.html?business=' + business;
 });
 
 
