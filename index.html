@@ -463,11 +463,11 @@ footer a { color: var(--gold); text-decoration: none; }
         <input type="checkbox" name="book_call" id="book_call" value="Yes — book a 20-min call" checked>
         <div>
           <div class="book-call-label">Book a 20-minute call with Anna Co-op</div>
-          <div class="book-call-sub">Pick a time on Calendly, or call / text 972-837-3179. Replies go to PRESS@annaartscouncil.org.</div>
+          <div class="book-call-sub">Pick a time on Google Calendar, or call / text 972-837-3179. Replies go to PRESS@annaartscouncil.org.</div>
         </div>
       </label>
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
-        <a id="calendly-btn" href="https://calendly.com/annaartscouncil/20min" target="_blank" rel="noopener" class="btn-submit" style="text-decoration:none; display:inline-block; padding:12px 22px; font-size:14px;">Book on Calendly →</a>
+        <a id="calendly-btn" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1JVkO3Cqu8W3EDDEq6oYRcVRJHSh7kwfzNW9tZNSPQfhKR9DdlNQSuVrogX6R146IEYmL-5pSG" target="_blank" rel="noopener" class="btn-submit" style="text-decoration:none; display:inline-block; padding:12px 22px; font-size:14px;">Book on Google Calendar →</a>
         <a href="tel:9728373179" style="text-decoration:none; display:inline-block; text-align:center; padding:12px 18px; border:1.5px solid var(--border); border-radius:10px; color:var(--fg); font-weight:600; font-size:14px;">Call 972-837-3179</a>
       </div>
       <div class="form-group full" style="margin-top:16px;">
@@ -487,7 +487,7 @@ footer a { color: var(--gold); text-decoration: none; }
     <h2>You're in.</h2>
     <p>Thank you — your details went to PRESS@annaartscouncil.org. Book your 20-minute call now, or call / text 972-837-3179.</p>
     <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-      <a id="success-calendly" href="https://calendly.com/annaartscouncil/20min" target="_blank" rel="noopener">Book a 20-min call on Calendly</a>
+      <a id="success-calendly" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1JVkO3Cqu8W3EDDEq6oYRcVRJHSh7kwfzNW9tZNSPQfhKR9DdlNQSuVrogX6R146IEYmL-5pSG" target="_blank" rel="noopener">Book a 20-min call on Google Calendar</a>
       <a href="tel:9728373179">Call 972-837-3179</a>
       <a href="mailto:PRESS@annaartscouncil.org">Email PRESS@</a>
     </div>
@@ -558,7 +558,7 @@ footer a { color: var(--gold); text-decoration: none; }
 const STORAGE_KEY = 'anna-coop-lead-draft';
 const LOG_KEY = 'anna-coop-lead-log';
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/PRESS@annaartscouncil.org';
-const CALENDLY_URL = 'https://calendly.com/annaartscouncil/20min';
+const BOOKING_URL = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1JVkO3Cqu8W3EDDEq6oYRcVRJHSh7kwfzNW9tZNSPQfhKR9DdlNQSuVrogX6R146IEYmL-5pSG';
 const PRESS_PHONE = '972-837-3179';
 const PRESS_EMAIL = 'PRESS@annaartscouncil.org';
 
@@ -798,7 +798,7 @@ function changeAffiliate(delta) {
   saveDraft();
 }
 
-document.querySelectorAll('#calendly-btn, #success-calendly').forEach(a => { if (a) a.href = CALENDLY_URL; });
+document.querySelectorAll('#calendly-btn, #success-calendly').forEach(a => { if (a) a.href = BOOKING_URL; });
 initTheme();
 loadDraft();
 </script>
