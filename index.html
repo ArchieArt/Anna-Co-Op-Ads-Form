@@ -558,8 +558,7 @@ footer a { color: var(--gold); text-decoration: none; }
 const STORAGE_KEY = 'anna-coop-lead-draft';
 const LOG_KEY = 'anna-coop-lead-log';
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/PRESS@annaartscouncil.org';
-// Paste the deployed Apps Script web app URL here after one-time setup.
-const SHEETS_WEBHOOK = '';
+const AIRTABLE_ENDPOINT = '/api/lead';
 const BOOKING_URL = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1JVkO3Cqu8W3EDDEq6oYRcVRJHSh7kwfzNW9tZNSPQfhKR9DdlNQSuVrogX6R146IEYmL-5pSG';
 const PRESS_PHONE = '972-837-3179';
 const PRESS_EMAIL = 'PRESS@annaartscouncil.org';
@@ -725,18 +724,15 @@ document.getElementById('lead-form').addEventListener('submit', async (e) => {
     console.warn('Email send failed; answers saved locally', err);
   }
 
-  // Google Sheet row
-  if (SHEETS_WEBHOOK) {
-    try {
-      await fetch(SHEETS_WEBHOOK, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(data),
-      });
-    } catch (err) {
-      console.warn('Sheet write failed', err);
-    }
+  // Airtable row
+  try {
+    await fetch(AIRTABLE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+  } catch (err) {
+    console.warn('Airtable write failed', err);
   }
 
   const business = encodeURIComponent(data.business || '');
