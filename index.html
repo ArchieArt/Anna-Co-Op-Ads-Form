@@ -181,6 +181,36 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;
 }
 
+
+.affiliate-wrap {
+  background: var(--bg-card); border: 1.5px solid var(--border);
+  border-radius: 14px; padding: 22px 20px;
+}
+.aff-stepper {
+  display: flex; align-items: center; gap: 0;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  overflow: hidden; width: fit-content; background: var(--bg-card);
+}
+.aff-btn {
+  width: 44px; height: 44px; border: none; background: transparent;
+  color: var(--fg); font-size: 22px; cursor: pointer;
+}
+.aff-btn:hover { background: var(--bg-warm); }
+.aff-btn:disabled { opacity: 0.3; cursor: default; }
+.aff-val {
+  width: 56px; text-align: center; font-family: 'JetBrains Mono', monospace;
+  font-size: 18px; border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border); line-height: 44px;
+}
+.aff-math {
+  display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; align-items: baseline;
+}
+.aff-total {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px; font-weight: 700; color: var(--espresso);
+}
+.aff-note { font-size: 13px; color: var(--fg-muted); }
+.aff-benefits { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .budget-wrap {
   background: var(--bg-card); border: 1.5px solid var(--border);
   border-radius: 14px; padding: 22px 20px 18px; margin-top: 8px;
@@ -391,10 +421,44 @@ footer a { color: var(--gold); text-decoration: none; }
         <input type="hidden" name="word_count" id="word_count" value="20">
       </div>
     </div>
-    <!-- Step 5: Book call -->
+
+    <!-- Step 5: Affiliate -->
     <div class="section-block">
-      <div class="section-eyebrow">Step 4</div>
-      <h2 class="section-title"><span class="section-num">5</span>Next step</h2>
+      <div class="section-eyebrow">Step 5 · Affiliate program</div>
+      <h2 class="section-title"><span class="section-num">5</span>Become a pickup location</h2>
+      <p class="section-desc">Purchase sets of 50 magazines at $2 each and place them free at your establishment. We list every affiliate as a place to pick up this month’s edition — more visibility, more foot traffic, more neighbors in your door.</p>
+      <div class="affiliate-wrap">
+        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+          <div class="aff-stepper">
+            <button type="button" class="aff-btn" id="aff-minus" onclick="changeAffiliate(-1)" disabled>−</button>
+            <div class="aff-val" id="aff-sets">0</div>
+            <button type="button" class="aff-btn" id="aff-plus" onclick="changeAffiliate(1)">+</button>
+          </div>
+          <div>
+            <div style="font-weight:600;">sets of 50</div>
+            <div class="aff-note">$2 per magazine · $100 per set</div>
+          </div>
+        </div>
+        <div class="aff-math">
+          <div class="aff-total" id="aff-copies">0 copies</div>
+          <div class="aff-total" id="aff-cost">$0</div>
+          <div class="aff-note" id="aff-status">Add sets to stock free copies and get listed</div>
+        </div>
+        <div class="aff-benefits">
+          <span class="unlock-pill">Listed as a pickup location</span>
+          <span class="unlock-pill">Free magazines for your customers</span>
+          <span class="unlock-pill">More visibility & foot traffic</span>
+          <span class="unlock-pill">Local engagement</span>
+        </div>
+        <input type="hidden" name="affiliate_sets" id="affiliate_sets" value="0">
+        <input type="hidden" name="affiliate_copies" id="affiliate_copies" value="0">
+        <input type="hidden" name="affiliate_total" id="affiliate_total" value="0">
+      </div>
+    </div>
+    <!-- Step 6: Book call -->
+    <div class="section-block">
+      <div class="section-eyebrow">Step 6</div>
+      <h2 class="section-title"><span class="section-num">6</span>Next step</h2>
       <label class="book-call">
         <input type="checkbox" name="book_call" id="book_call" value="Yes — book a 20-min call" checked>
         <div>
@@ -517,6 +581,9 @@ function getFormData() {
   data.reach_percent = document.getElementById('reach_percent').value;
   data.ad_size = document.getElementById('ad_size').value;
   data.word_count = document.getElementById('word_count').value;
+  data.affiliate_sets = document.getElementById('affiliate_sets').value;
+  data.affiliate_copies = document.getElementById('affiliate_copies').value;
+  data.affiliate_total = document.getElementById('affiliate_total').value;
   return data;
 }
 
@@ -543,6 +610,11 @@ function loadDraft() {
       });
     }
     if (d.book_call === 'No') document.getElementById('book_call').checked = false;
+    if (d.affiliate_sets) {
+      const sets = parseInt(d.affiliate_sets, 10) || 0;
+      document.getElementById('affiliate_sets').value = 0;
+      changeAffiliate(sets);
+    }
     if (d.magazine_budget) {
       const idx = TIERS.findIndex(t => String(t.amount) === String(d.magazine_budget));
       if (idx >= 0) {
@@ -616,6 +688,9 @@ document.getElementById('lead-form').addEventListener('submit', async (e) => {
     interests: data.interests.join(', ') || 'None selected',
     goals: data.goals.join(', ') || 'None selected',
     book_call: data.book_call,
+    affiliate_sets: data.affiliate_sets,
+    affiliate_copies: data.affiliate_copies,
+    affiliate_total: '$' + Number(data.affiliate_total || 0).toLocaleString(),
     magazine_budget: '$' + Number(data.magazine_budget).toLocaleString(),
     reach_percent: data.reach_percent + '% of Anna',
     ad_size: data.ad_size || document.getElementById('ad_size').value,
@@ -685,6 +760,30 @@ document.getElementById('budget-slider').addEventListener('input', () => {
   saveDraft();
 });
 updateBudget();
+
+
+const SET_SIZE = 50;
+const PRICE_EACH = 2;
+const AFF_MAX = 20;
+
+function changeAffiliate(delta) {
+  const cur = parseInt(document.getElementById('affiliate_sets').value, 10) || 0;
+  const next = Math.max(0, Math.min(AFF_MAX, cur + delta));
+  const copies = next * SET_SIZE;
+  const cost = copies * PRICE_EACH;
+  document.getElementById('aff-sets').textContent = next;
+  document.getElementById('affiliate_sets').value = next;
+  document.getElementById('affiliate_copies').value = copies;
+  document.getElementById('affiliate_total').value = cost;
+  document.getElementById('aff-copies').textContent = copies.toLocaleString() + ' copies';
+  document.getElementById('aff-cost').textContent = '$' + cost.toLocaleString();
+  document.getElementById('aff-minus').disabled = next === 0;
+  document.getElementById('aff-plus').disabled = next === AFF_MAX;
+  document.getElementById('aff-status').textContent = next === 0
+    ? 'Add sets to stock free copies and get listed'
+    : 'We will list you as a pickup location for this month’s edition';
+  saveDraft();
+}
 
 initTheme();
 loadDraft();
