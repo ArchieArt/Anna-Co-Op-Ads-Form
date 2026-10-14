@@ -386,18 +386,18 @@ footer a { color: var(--gold); text-decoration: none; }
       <p class="section-desc">Drag the slider. Watch your ad size and word count grow — and see how much of Anna sees the story.</p>
       <div class="budget-wrap">
         <div class="budget-amount" id="budget-amount">$250</div>
-        <div class="budget-sub" id="budget-sub">Business-card presence in the next holiday issue</div>
-        <input type="range" class="budget-slider" id="budget-slider" min="0" max="5" step="1" value="0" aria-label="Magazine ad budget">
+        <div class="budget-sub" id="budget-sub">Quarter-page ad in the next holiday issue</div>
+        <input type="range" class="budget-slider" id="budget-slider" min="0" max="6" step="1" value="0" aria-label="Magazine ad budget">
         <div class="budget-labels">
-          <span>$250</span><span>$500</span><span>$1K</span><span>$2.5K</span><span>$5K</span><span>$6.5K</span>
+          <span>$250</span><span>$500</span><span>$1K</span><span>$1.25K</span><span>$2.5K</span><span>$5K</span><span>$6.5K</span>
         </div>
         <div class="reach-row" style="margin-top:18px;">
           <div class="reach-card">
-            <div class="reach-num" id="ad-size" style="font-size:22px;">Business Card</div>
+            <div class="reach-num" id="ad-size" style="font-size:20px;">1/4 page</div>
             <div class="reach-label">ad size</div>
           </div>
           <div class="reach-card">
-            <div class="reach-num" id="word-count">~20</div>
+            <div class="reach-num" id="word-count">Ad only</div>
             <div class="reach-label">words of your story</div>
           </div>
         </div>
@@ -417,8 +417,8 @@ footer a { color: var(--gold); text-decoration: none; }
         </div>
         <input type="hidden" name="magazine_budget" id="magazine_budget" value="250">
         <input type="hidden" name="reach_percent" id="reach_percent" value="10">
-        <input type="hidden" name="ad_size" id="ad_size" value="Business Card">
-        <input type="hidden" name="word_count" id="word_count" value="20">
+        <input type="hidden" name="ad_size" id="ad_size" value="1/4 page">
+        <input type="hidden" name="word_count" id="word_count" value="0">
       </div>
     </div>
 
@@ -745,24 +745,27 @@ document.getElementById('lead-form').addEventListener('submit', async (e) => {
 
 
 const TIERS = [
-  { amount: 250,  pct: 10,  homes: 1500,  size: 'Business Card', words: '~20',  wordNum: 20,
-    label: 'Business-card presence',
-    unlocks: ['Name & contact', 'Logo', 'One short line'] },
-  { amount: 500,  pct: 20,  homes: 3000,  size: 'Quarter Page',  words: '~80',  wordNum: 80,
-    label: 'Quarter-page story start',
-    unlocks: ['Photo', 'Clear offer', 'Room to introduce you'] },
-  { amount: 1000, pct: 30,  homes: 4500,  size: 'Half Page',     words: '~200', wordNum: 200,
-    label: 'Half-page storytelling',
-    unlocks: ['Multiple photos', 'Atmosphere + CTA', 'Real story space'] },
-  { amount: 2500, pct: 60,  homes: 9000,  size: 'Full Page',     words: '~400', wordNum: 400,
-    label: 'Full-page feature depth',
-    unlocks: ['Full page', 'Brand storytelling', 'Priority placement'] },
-  { amount: 5000, pct: 80,  homes: 12000, size: 'Multi-page',    words: '~700', wordNum: 700,
-    label: 'Multi-page feature',
-    unlocks: ['2+ pages', 'Interview-style story', 'Category emphasis'] },
-  { amount: 6500, pct: 100, homes: 14955, size: 'Feature',       words: '1,000+', wordNum: 1000,
-    label: 'Presenting / full-issue feature',
-    unlocks: ['Feature interview', 'Maximum storytelling', '100% of Anna'] },
+  { amount: 250,  pct: 10,  homes: 1500,  size: '1/4 page', words: 'Ad only', wordNum: 0,
+    label: 'Quarter-page ad',
+    unlocks: ['1/4 page ad', 'Logo & offer', 'Name & contact'] },
+  { amount: 500,  pct: 20,  homes: 3000,  size: '1/2 page', words: 'Ad only', wordNum: 0,
+    label: 'Half-page ad',
+    unlocks: ['1/2 page ad', 'Photo', 'Clear offer'] },
+  { amount: 1000, pct: 30,  homes: 4500,  size: 'Full page', words: 'Ad only', wordNum: 0,
+    label: 'Full-page ad',
+    unlocks: ['Full page ad', 'Multiple photos', 'Stronger placement'] },
+  { amount: 1250, pct: 40,  homes: 6000,  size: '1/2 page story', words: '500', wordNum: 500,
+    label: 'Sponsor · half-page story',
+    unlocks: ['1/2 page story', '500 words', 'Sponsor placement'] },
+  { amount: 2500, pct: 60,  homes: 9000,  size: 'Full ad + story', words: '1,000', wordNum: 1000,
+    label: 'Full-page ad + full-page story',
+    unlocks: ['Full page ad', 'Full page story', '1,000 words'] },
+  { amount: 5000, pct: 80,  homes: 12000, size: 'Inside cover + story', words: '2,000', wordNum: 2000,
+    label: 'Inside front or back cover + 2-page story',
+    unlocks: ['Inside front or back cover', '2-page article', '2,000 words', '3 photos'] },
+  { amount: 6500, pct: 100, homes: 14955, size: 'Back cover feature', words: '3,000', wordNum: 3000,
+    label: 'Back cover + 3-page cover story',
+    unlocks: ['Most prestigious back cover', '3-page cover story', '3,000 words', '5 photos', '100% of Anna'] },
 ];
 
 function updateBudget() {
