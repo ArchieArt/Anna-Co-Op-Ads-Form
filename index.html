@@ -352,14 +352,24 @@ footer a { color: var(--gold); text-decoration: none; }
     <!-- Step 4: Budget vs goals -->
     <div class="section-block">
       <div class="section-eyebrow">Step 4 · Next holiday issue</div>
-      <h2 class="section-title"><span class="section-num">4</span>Match your goals to reach</h2>
-      <p class="section-desc">Drag the slider. The more you invest in the Magazine ad, the more of Anna sees your story — and the more pages, words, and feature space you unlock.</p>
+      <h2 class="section-title"><span class="section-num">4</span>Ad size & word count</h2>
+      <p class="section-desc">Drag the slider. Watch your ad size and word count grow — and see how much of Anna sees the story.</p>
       <div class="budget-wrap">
         <div class="budget-amount" id="budget-amount">$250</div>
         <div class="budget-sub" id="budget-sub">Business-card presence in the next holiday issue</div>
         <input type="range" class="budget-slider" id="budget-slider" min="0" max="5" step="1" value="0" aria-label="Magazine ad budget">
         <div class="budget-labels">
           <span>$250</span><span>$500</span><span>$1K</span><span>$2.5K</span><span>$5K</span><span>$6.5K</span>
+        </div>
+        <div class="reach-row" style="margin-top:18px;">
+          <div class="reach-card">
+            <div class="reach-num" id="ad-size" style="font-size:22px;">Business Card</div>
+            <div class="reach-label">ad size</div>
+          </div>
+          <div class="reach-card">
+            <div class="reach-num" id="word-count">~20</div>
+            <div class="reach-label">words of your story</div>
+          </div>
         </div>
         <div class="reach-row">
           <div class="reach-card">
@@ -377,6 +387,8 @@ footer a { color: var(--gold); text-decoration: none; }
         </div>
         <input type="hidden" name="magazine_budget" id="magazine_budget" value="250">
         <input type="hidden" name="reach_percent" id="reach_percent" value="10">
+        <input type="hidden" name="ad_size" id="ad_size" value="Business Card">
+        <input type="hidden" name="word_count" id="word_count" value="20">
       </div>
     </div>
     <!-- Step 5: Book call -->
@@ -452,6 +464,8 @@ function getFormData() {
   data.book_call = document.getElementById('book_call').checked ? 'Yes' : 'No';
   data.magazine_budget = document.getElementById('magazine_budget').value;
   data.reach_percent = document.getElementById('reach_percent').value;
+  data.ad_size = document.getElementById('ad_size').value;
+  data.word_count = document.getElementById('word_count').value;
   return data;
 }
 
@@ -553,6 +567,8 @@ document.getElementById('lead-form').addEventListener('submit', async (e) => {
     book_call: data.book_call,
     magazine_budget: '$' + Number(data.magazine_budget).toLocaleString(),
     reach_percent: data.reach_percent + '% of Anna',
+    ad_size: data.ad_size || document.getElementById('ad_size').value,
+    word_count: (data.word_count || document.getElementById('word_count').value) + ' words',
     notes: data.notes || '',
   };
 
@@ -576,18 +592,24 @@ document.getElementById('lead-form').addEventListener('submit', async (e) => {
 
 
 const TIERS = [
-  { amount: 250,  pct: 10,  homes: 1500,  label: 'Business-card presence',
-    unlocks: ['Name & contact', 'Logo', 'Short line of copy'] },
-  { amount: 500,  pct: 20,  homes: 3000,  label: 'Quarter-page story start',
-    unlocks: ['~80 words', 'Photo', 'Clear offer', '1 page presence'] },
-  { amount: 1000, pct: 30,  homes: 4500,  label: 'Half-page storytelling',
-    unlocks: ['~200 words', 'Multiple photos', 'Atmosphere + CTA', 'Stronger placement'] },
-  { amount: 2500, pct: 60,  homes: 9000,  label: 'Full-page feature depth',
-    unlocks: ['~400 words', 'Full page', 'Brand storytelling', 'Priority placement'] },
-  { amount: 5000, pct: 80,  homes: 12000, label: 'Multi-page feature',
-    unlocks: ['~700+ words', '2+ pages', 'Interview-style story', 'Category emphasis'] },
-  { amount: 6500, pct: 100, homes: 14955, label: 'Presenting / full-issue feature',
-    unlocks: ['Full storytelling', 'Feature interview', 'Maximum pages & word count', '100% of Anna'] },
+  { amount: 250,  pct: 10,  homes: 1500,  size: 'Business Card', words: '~20',  wordNum: 20,
+    label: 'Business-card presence',
+    unlocks: ['Name & contact', 'Logo', 'One short line'] },
+  { amount: 500,  pct: 20,  homes: 3000,  size: 'Quarter Page',  words: '~80',  wordNum: 80,
+    label: 'Quarter-page story start',
+    unlocks: ['Photo', 'Clear offer', 'Room to introduce you'] },
+  { amount: 1000, pct: 30,  homes: 4500,  size: 'Half Page',     words: '~200', wordNum: 200,
+    label: 'Half-page storytelling',
+    unlocks: ['Multiple photos', 'Atmosphere + CTA', 'Real story space'] },
+  { amount: 2500, pct: 60,  homes: 9000,  size: 'Full Page',     words: '~400', wordNum: 400,
+    label: 'Full-page feature depth',
+    unlocks: ['Full page', 'Brand storytelling', 'Priority placement'] },
+  { amount: 5000, pct: 80,  homes: 12000, size: 'Multi-page',    words: '~700', wordNum: 700,
+    label: 'Multi-page feature',
+    unlocks: ['2+ pages', 'Interview-style story', 'Category emphasis'] },
+  { amount: 6500, pct: 100, homes: 14955, size: 'Feature',       words: '1,000+', wordNum: 1000,
+    label: 'Presenting / full-issue feature',
+    unlocks: ['Feature interview', 'Maximum storytelling', '100% of Anna'] },
 ];
 
 function updateBudget() {
@@ -597,6 +619,10 @@ function updateBudget() {
   document.getElementById('budget-sub').textContent = t.label + ' in the next holiday issue';
   document.getElementById('reach-pct').textContent = t.pct + '%';
   document.getElementById('reach-homes').textContent = '~' + t.homes.toLocaleString();
+  document.getElementById('ad-size').textContent = t.size;
+  document.getElementById('word-count').textContent = t.words;
+  document.getElementById('ad_size').value = t.size;
+  document.getElementById('word_count').value = t.wordNum;
   document.getElementById('magazine_budget').value = t.amount;
   document.getElementById('reach_percent').value = t.pct;
   document.getElementById('unlock-list').innerHTML = t.unlocks.map((u, idx) =>
