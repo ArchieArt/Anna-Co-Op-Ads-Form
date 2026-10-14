@@ -726,7 +726,7 @@ footer a { color: var(--gold); text-decoration: none; }
   <div class="masthead-total">
     <div>
       <div class="total-label">Your total</div>
-      <div class="total-amount" id="masthead-total">$0</div>
+      <div class="total-amount" id="masthead-total" aria-live="polite" aria-atomic="true">$0</div>
     </div>
     <button class="btn-review" id="btn-review-top" onclick="openInvoice()" disabled>Reserve your seat →</button>
   </div>
@@ -767,7 +767,7 @@ footer a { color: var(--gold); text-decoration: none; }
     <p class="section-desc">Print ads in Anna Co-op Magazine, mailed to every home in ZIP 75409. Choose one issue or save with a multi-issue contract.</p>
     <div class="card-grid" id="ad-grid">
 
-      <label class="option-card" onclick="selectCard(this,'ad')" data-price="100" data-label="Business Card Ad">
+      <label class="option-card" onclick="selectCard(this,'ad')" onkeydown="handleCardKey(event, this, 'ad')" tabindex="0" role="radio" data-price="100" data-label="Business Card Ad">
         <input type="radio" name="ad" value="100">
         <div class="card-check"><div class="card-check-dot"></div></div>
         <div class="card-label">Business Card</div>
@@ -775,7 +775,7 @@ footer a { color: var(--gold); text-decoration: none; }
         <div class="card-desc">Small-format awareness placement. Name, logo, contact — perfect for brand recall.</div>
       </label>
 
-      <label class="option-card" onclick="selectCard(this,'ad')" data-price="250" data-label="Quarter-Page Ad">
+      <label class="option-card" onclick="selectCard(this,'ad')" onkeydown="handleCardKey(event, this, 'ad')" tabindex="0" role="radio" data-price="250" data-label="Quarter-Page Ad">
         <input type="radio" name="ad" value="250">
         <div class="card-check"><div class="card-check-dot"></div></div>
         <div class="card-label">Quarter Page</div>
@@ -783,7 +783,7 @@ footer a { color: var(--gold); text-decoration: none; }
         <div class="card-desc">Enough room for an offer, a photo, and a clear call to action.</div>
       </label>
 
-      <label class="option-card" onclick="selectCard(this,'ad')" data-price="500" data-label="Half-Page Ad">
+      <label class="option-card" onclick="selectCard(this,'ad')" onkeydown="handleCardKey(event, this, 'ad')" tabindex="0" role="radio" data-price="500" data-label="Half-Page Ad">
         <input type="radio" name="ad" value="500">
         <div class="card-check"><div class="card-check-dot"></div></div>
         <div class="card-label">Half Page</div>
@@ -791,7 +791,7 @@ footer a { color: var(--gold); text-decoration: none; }
         <div class="card-desc">Real estate for storytelling — brand identity, atmosphere, and CTA.</div>
       </label>
 
-      <label class="option-card" onclick="selectCard(this,'ad')" data-price="1000" data-label="Full-Page Ad">
+      <label class="option-card" onclick="selectCard(this,'ad')" onkeydown="handleCardKey(event, this, 'ad')" tabindex="0" role="radio" data-price="1000" data-label="Full-Page Ad">
         <input type="radio" name="ad" value="1000">
         <div class="card-check"><div class="card-check-dot"></div></div>
         <div class="card-label">Full Page</div>
@@ -839,7 +839,7 @@ footer a { color: var(--gold); text-decoration: none; }
     <p class="section-desc">Sponsorships include a featured interview, a premium placement, and category exclusivity. Each level is one business — first reserved, first held.</p>
     <div class="card-grid" id="sponsor-grid">
 
-      <label class="option-card" onclick="selectCard(this,'sponsor')" data-price="1250" data-label="Back Cover Sponsorship">
+      <label class="option-card" onclick="selectCard(this,'sponsor')" onkeydown="handleCardKey(event, this, 'sponsor')" tabindex="0" role="radio" data-price="1250" data-label="Back Cover Sponsorship">
         <input type="radio" name="sponsor" value="1250">
         <div class="card-check"><div class="card-check-dot"></div></div>
         <div class="card-label">Back Cover</div>
@@ -852,7 +852,7 @@ footer a { color: var(--gold); text-decoration: none; }
         <span class="card-badge exclusive">Exclusive</span>
       </label>
 
-      <label class="option-card" onclick="selectCard(this,'sponsor')" data-price="2500" data-label="Inside Cover Sponsorship">
+      <label class="option-card" onclick="selectCard(this,'sponsor')" onkeydown="handleCardKey(event, this, 'sponsor')" tabindex="0" role="radio" data-price="2500" data-label="Inside Cover Sponsorship">
         <input type="radio" name="sponsor" value="2500">
         <div class="card-check"><div class="card-check-dot"></div></div>
         <div class="card-label">Inside Cover</div>
@@ -865,7 +865,7 @@ footer a { color: var(--gold); text-decoration: none; }
         <span class="card-badge exclusive">Exclusive</span>
       </label>
 
-      <label class="option-card" onclick="selectCard(this,'sponsor')" data-price="5000" data-label="Centerfold Sponsorship">
+      <label class="option-card" onclick="selectCard(this,'sponsor')" onkeydown="handleCardKey(event, this, 'sponsor')" tabindex="0" role="radio" data-price="5000" data-label="Centerfold Sponsorship">
         <input type="radio" name="sponsor" value="5000">
         <div class="card-check"><div class="card-check-dot"></div></div>
         <div class="card-label">Centerfold</div>
@@ -879,7 +879,7 @@ footer a { color: var(--gold); text-decoration: none; }
         <span class="card-badge exclusive">Exclusive</span>
       </label>
 
-      <label class="option-card" onclick="selectCard(this,'sponsor')" data-price="6500" data-label="Presenting Sponsor">
+      <label class="option-card" onclick="selectCard(this,'sponsor')" onkeydown="handleCardKey(event, this, 'sponsor')" tabindex="0" role="radio" data-price="6500" data-label="Presenting Sponsor">
         <input type="radio" name="sponsor" value="6500">
         <div class="card-check"><div class="card-check-dot"></div></div>
         <div class="card-label">Presenting Sponsor</div>
@@ -904,7 +904,7 @@ footer a { color: var(--gold); text-decoration: none; }
     <p class="section-desc">Stack these alongside your ad or sponsorship. Each is independent — check any that apply.</p>
     <div class="card-grid" id="addon-grid">
 
-      <label class="option-card" onclick="toggleAddon(this)" data-price="29" data-label="Anna Co-op Academy — Monthly Membership" data-period="/mo">
+      <label class="option-card" onclick="toggleAddon(this)" onkeydown="handleCardKey(event, this, 'addon')" tabindex="0" role="checkbox" data-price="29" data-label="Anna Co-op Academy — Monthly Membership" data-period="/mo">
         <input type="checkbox" name="addon-academy">
         <div class="card-check square"><div class="card-check-tick">✓</div></div>
         <div class="card-label">Co-op Academy</div>
@@ -917,7 +917,7 @@ footer a { color: var(--gold); text-decoration: none; }
         </ul>
       </label>
 
-      <label class="option-card" onclick="toggleAddon(this)" data-price="0" data-label="MIA Gift Box Sponsorship" data-price-display="Ask us">
+      <label class="option-card" onclick="toggleAddon(this)" onkeydown="handleCardKey(event, this, 'addon')" tabindex="0" role="checkbox" data-price="0" data-label="MIA Gift Box Sponsorship" data-price-display="Ask us">
         <input type="checkbox" name="addon-mia">
         <div class="card-check square"><div class="card-check-tick">✓</div></div>
         <div class="card-label">MIA Gift Box</div>
@@ -983,7 +983,7 @@ footer a { color: var(--gold); text-decoration: none; }
   <!-- Reserve CTA -->
   <div style="text-align:center; padding: 8px 0 0;">
     <button class="btn-review" id="btn-review-bottom" onclick="openInvoice()" disabled style="padding: 16px 40px; font-size: 16px; border-radius: 10px;">Reserve your seat →</button>
-    <p style="margin-top:12px; font-size:12px; color: var(--fg-muted);">You'll review your itemized order before payment. Two-issue minimum on all ad sizes.</p>
+    <p style="margin-top:12px; font-size:12px; color: var(--fg-muted);">You'll review your itemized order before payment. Choose 1, 3, or 6 issues — multi-issue contracts save automatically.</p>
   </div>
 
 </main>
@@ -1268,8 +1268,151 @@ function copyOrder() {
   });
 }
 
+
+/* ─── ACCESSIBILITY: KEYBOARD ─── */
+function handleCardKey(e, card, type) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    if (type === 'ad' || type === 'sponsor') {
+      selectCard(card, type);
+    } else if (type === 'addon') {
+      toggleAddon(card);
+    }
+  }
+}
+
+/* ─── LOCALSTORAGE ─── */
+const STORAGE_KEY = 'anna-coop-ads-draft';
+
+function saveState() {
+  try {
+    const toSave = {
+      ad: state.ad,
+      issues: state.issues,
+      sponsor: state.sponsor,
+      academy: state.academy,
+      mia: state.mia,
+      affiliate: state.affiliate,
+      // form fields
+      name: document.getElementById('f-name')?.value || '',
+      contact: document.getElementById('f-contact')?.value || '',
+      email: document.getElementById('f-email')?.value || '',
+      phone: document.getElementById('f-phone')?.value || '',
+      notes: document.getElementById('f-notes')?.value || '',
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  } catch (e) { /* ignore quota or private mode */ }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    
+    // Restore ad
+    if (saved.ad && saved.ad.price > 0) {
+      const card = document.querySelector(`#ad-grid .option-card[data-price="${saved.ad.price}"]`);
+      if (card) selectCard(card, 'ad');
+    }
+    // Restore issues
+    if (saved.issues) {
+      state.issues = saved.issues;
+      const radio = document.querySelector(`input[name="issues"][value="${saved.issues}"]`);
+      if (radio) {
+        radio.checked = true;
+        setIssues(saved.issues);
+      }
+    }
+    // Restore sponsor
+    if (saved.sponsor && saved.sponsor.price > 0) {
+      const card = document.querySelector(`#sponsor-grid .option-card[data-price="${saved.sponsor.price}"]`);
+      if (card) selectCard(card, 'sponsor');
+    }
+    // Restore addons
+    if (saved.academy) {
+      const card = document.querySelector('input[name="addon-academy"]')?.closest('.option-card');
+      if (card && !card.classList.contains('selected')) toggleAddon(card);
+    }
+    if (saved.mia) {
+      const card = document.querySelector('input[name="addon-mia"]')?.closest('.option-card');
+      if (card && !card.classList.contains('selected')) toggleAddon(card);
+    }
+    // Restore affiliate
+    if (saved.affiliate > 0) {
+      state.affiliate = 0;
+      changeAffiliate(saved.affiliate);
+    }
+    // Restore form
+    if (saved.name) document.getElementById('f-name').value = saved.name;
+    if (saved.contact) document.getElementById('f-contact').value = saved.contact;
+    if (saved.email) document.getElementById('f-email').value = saved.email;
+    if (saved.phone) document.getElementById('f-phone').value = saved.phone;
+    if (saved.notes) document.getElementById('f-notes').value = saved.notes;
+    
+    updateReview();
+  } catch (e) { console.warn('Could not restore draft', e); }
+}
+
+/* ─── MODAL FOCUS ─── */
+let previousFocus = null;
+
+const originalOpenInvoice = openInvoice;
+openInvoice = function() {
+  previousFocus = document.activeElement;
+  originalOpenInvoice();
+  // Focus the close button
+  setTimeout(() => {
+    const closeBtn = document.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
+  }, 50);
+  // Simple focus trap
+  document.addEventListener('keydown', trapFocus);
+};
+
+const originalCloseInvoice = closeInvoice;
+closeInvoice = function() {
+  document.removeEventListener('keydown', trapFocus);
+  originalCloseInvoice();
+  if (previousFocus && typeof previousFocus.focus === 'function') {
+    previousFocus.focus();
+  }
+};
+
+function trapFocus(e) {
+  if (e.key !== 'Tab') return;
+  const modal = document.querySelector('.modal');
+  if (!modal) return;
+  const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey) {
+    if (document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    }
+  } else {
+    if (document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+}
+
+// Call saveState after mutations
+const originalUpdateReview = updateReview;
+updateReview = function() {
+  originalUpdateReview();
+  saveState();
+};
+
+// Init
+loadState();
+
 // init
 updateReview();
 </script>
 </body>
 </html>
+
