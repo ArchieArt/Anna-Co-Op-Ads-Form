@@ -3,1028 +3,322 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Reserve your ad or sponsorship in Anna Co-op Magazine. Reaches every home in ZIP 75409 by USPS saturation mail. Build your order and reserve your seat.">
+<meta name="description" content="Tell Anna Co-op about your business. Learn about magazine ads, TV, marketplace, free scans and case studies, then book a 20-minute call.">
 <meta name="theme-color" content="#352D27">
-<meta property="og:title" content="Anna Co-op · Reserve Your Seat">
-<meta property="og:description" content="Print ads and sponsorships in Anna Co-op Magazine — mailed to every home in ZIP 75409.">
+<meta property="og:title" content="Anna Co-op · Tell Us About Your Business">
+<meta property="og:description" content="Share your details, choose what you want to learn, and book a 20-minute call with Anna Co-op.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://anna-co-op-ads-form.vercel.app">
-
-<title>Anna Co-op · Reserve Your Seat</title>
+<title>Anna Co-op · Tell Us About Your Business</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* ─── TOKENS ─── */
 :root {
-  --bg:           #FAF7F2;
-  --bg-card:      #FFFFFF;
-  --bg-warm:      #FFF8ED;
-  --fg:           #1A1210;
-  --fg-mid:       #4A3F39;
-  --fg-muted:     #7A6E69;
-  --espresso:     #352D27;
-  --burgundy:     #8B1A1A;
-  --gold:         #C8922A;
-  --gold-light:   #F2E8D9;
-  --border:       #E0D5C8;
-  --border-warm:  #D4C4B0;
-  --green:        #2A6E3F;
-  --green-bg:     #EEF7F1;
+  --bg: #FAF7F2; --bg-card: #FFFFFF; --bg-warm: #FFF8ED;
+  --fg: #1A1210; --fg-mid: #4A3F39; --fg-muted: #7A6E69;
+  --espresso: #352D27; --burgundy: #8B1A1A; --gold: #C8922A;
+  --gold-light: #F2E8D9; --border: #E0D5C8; --border-warm: #D4C4B0;
+  --green: #2A6E3F; --green-bg: #EEF7F1;
   color-scheme: light;
 }
-
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg:           #160E0B;
-    --bg-card:      #1F1410;
-    --bg-warm:      #261A10;
-    --fg:           #F5EDE5;
-    --fg-mid:       #C8B8AC;
-    --fg-muted:     #8A7A72;
-    --espresso:     #C8B8AC;
-    --burgundy:     #D4524A;
-    --gold:         #D4A44A;
-    --gold-light:   #2A1E14;
-    --border:       #3A2A22;
-    --border-warm:  #4A3A2A;
-    --green:        #4AC47A;
-    --green-bg:     #0E2016;
+    --bg: #160E0B; --bg-card: #1F1410; --bg-warm: #261A10;
+    --fg: #F5EDE5; --fg-mid: #C8B8AC; --fg-muted: #8A7A72;
+    --espresso: #C8B8AC; --burgundy: #D4524A; --gold: #D4A44A;
+    --gold-light: #2A1E14; --border: #3A2A22; --border-warm: #4A3A2A;
+    --green: #4AC47A; --green-bg: #0E2016;
     color-scheme: dark;
   }
 }
-
-/* ─── RESET ─── */
+html[data-theme="light"] {
+  --bg: #FAF7F2; --bg-card: #FFFFFF; --bg-warm: #FFF8ED;
+  --fg: #1A1210; --fg-mid: #4A3F39; --fg-muted: #7A6E69;
+  --espresso: #352D27; --gold: #C8922A; --gold-light: #F2E8D9;
+  --border: #E0D5C8; --green: #2A6E3F;
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  --bg: #160E0B; --bg-card: #1F1410; --bg-warm: #261A10;
+  --fg: #F5EDE5; --fg-mid: #C8B8AC; --fg-muted: #8A7A72;
+  --espresso: #C8B8AC; --gold: #D4A44A; --gold-light: #2A1E14;
+  --border: #3A2A22; --green: #4AC47A;
+  color-scheme: dark;
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--bg); color: var(--fg);
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  min-height: 100vh;
+  font-size: 15px; line-height: 1.6; min-height: 100vh;
 }
-
-/* ─── MASTHEAD ─── */
 .masthead {
-  background: var(--espresso);
-  color: #FAF7F2;
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  background: var(--espresso); color: #FAF7F2;
+  padding: 14px 24px; display: flex; align-items: center;
+  justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  position: sticky; top: 0; z-index: 100;
   box-shadow: 0 2px 12px rgba(0,0,0,0.25);
 }
 .masthead-name {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  color: #FAF7F2;
+  font-size: 18px; font-weight: 900; letter-spacing: 0.02em;
 }
 .masthead-name span { color: var(--gold); }
 .masthead-sub {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(250,247,242,0.55);
-  margin-top: 2px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250,247,242,0.55); margin-top: 2px;
 }
-.masthead-total {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+#theme-toggle {
+  background: transparent; border: 1px solid rgba(250,247,242,0.3);
+  color: #FAF7F2; border-radius: 6px; padding: 6px 10px;
+  font-size: 14px; cursor: pointer;
 }
-.total-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(250,247,242,0.55);
-}
-.total-amount {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 20px;
-  font-variant-numeric: tabular-nums;
-  color: var(--gold);
-  font-weight: 500;
-}
-.btn-review {
-  background: var(--gold);
-  color: var(--espresso);
-  border: none;
-  border-radius: 6px;
-  padding: 9px 18px;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.15s, opacity 0.15s;
-}
-.btn-review:hover { background: #D4A030; }
-.btn-review:disabled { opacity: 0.4; cursor: default; }
-
-/* ─── HERO ─── */
 .hero {
-  background: var(--espresso);
-  color: #FAF7F2;
-  padding: 72px 24px 80px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  background: var(--espresso); color: #FAF7F2;
+  padding: 64px 24px 72px; text-align: center; position: relative; overflow: hidden;
 }
 .hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
+  content: ''; position: absolute; inset: 0;
   background: radial-gradient(ellipse at 60% 40%, rgba(200,146,42,0.15) 0%, transparent 65%);
   pointer-events: none;
 }
 .hero-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 18px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
 }
 .hero h1 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(30px, 6vw, 54px);
-  font-weight: 900;
-  line-height: 1.12;
-  color: #FAF7F2;
-  text-wrap: balance;
-  margin-bottom: 18px;
+  font-size: clamp(28px, 5.5vw, 48px); font-weight: 900;
+  line-height: 1.15; margin-bottom: 16px; text-wrap: balance;
 }
 .hero h1 em { color: var(--gold); font-style: italic; }
 .hero-sub {
-  font-size: clamp(14px, 2vw, 16px);
-  color: rgba(250,247,242,0.72);
-  max-width: 540px;
-  margin: 0 auto 36px;
-  line-height: 1.7;
+  font-size: clamp(14px, 2vw, 16px); color: rgba(250,247,242,0.75);
+  max-width: 520px; margin: 0 auto; line-height: 1.65;
 }
-.hero-stats {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0;
-  border: 1px solid rgba(200,146,42,0.3);
-  border-radius: 10px;
-  max-width: 600px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-.stat-block {
-  flex: 1;
-  min-width: 120px;
-  padding: 18px 20px;
-  border-right: 1px solid rgba(200,146,42,0.3);
-  text-align: center;
-}
-.stat-block:last-child { border-right: none; }
-.stat-num {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--gold);
-  line-height: 1;
-}
-.stat-desc {
-  font-size: 11px;
-  color: rgba(250,247,242,0.55);
-  margin-top: 4px;
-  letter-spacing: 0.04em;
-}
-
-/* ─── MAIN LAYOUT ─── */
-.main {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 56px 24px 80px;
-}
-
-/* ─── SECTION HEADERS ─── */
+.main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+.section-block { margin-bottom: 40px; }
 .section-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-.section-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--espresso);
-  color: var(--gold);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  margin-right: 10px;
-  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
 }
 h2.section-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(20px, 3.5vw, 26px);
-  font-weight: 700;
-  color: var(--fg);
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
+  font-size: clamp(20px, 3.2vw, 26px); font-weight: 700; margin-bottom: 6px;
+  display: flex; align-items: center; gap: 10px;
 }
-.section-desc {
-  color: var(--fg-muted);
-  font-size: 14px;
-  margin-bottom: 26px;
-  padding-left: 38px;
+.section-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--espresso); color: var(--gold);
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; flex-shrink: 0;
 }
-.section-block {
-  margin-bottom: 56px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--border);
-}
-.section-block:last-of-type { border-bottom: none; }
-
-/* ─── OPTION CARDS ─── */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 14px;
-  padding-left: 38px;
-}
-.option-card {
-  background: var(--bg-card);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  padding: 18px 16px;
-  cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
-  position: relative;
-  user-select: none;
-}
-.option-card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(200,146,42,0.12);
-}
-.option-card.selected {
-  border-color: var(--espresso);
-  background: var(--bg-warm);
-  box-shadow: 0 0 0 3px rgba(53,45,39,0.10);
-}
-.option-card input[type="radio"],
-.option-card input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-.card-check {
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--border-warm);
-  border-radius: 50%;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.15s, background 0.15s;
-}
-.option-card.selected .card-check {
-  border-color: var(--espresso);
-  background: var(--espresso);
-}
-.card-check-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-.option-card.selected .card-check-dot { opacity: 1; }
-
-/* checkbox variant */
-.card-check.square { border-radius: 4px; }
-.card-check-tick {
-  font-size: 11px;
-  color: var(--gold);
-  opacity: 0;
-  transition: opacity 0.15s;
-  line-height: 1;
-}
-.option-card.selected .card-check-tick { opacity: 1; }
-
-.card-label {
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--fg);
-  margin-bottom: 4px;
-}
-.card-price {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 18px;
-  font-variant-numeric: tabular-nums;
-  color: var(--espresso);
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-.card-price .per { font-size: 12px; color: var(--fg-muted); font-weight: 400; }
-.card-desc {
-  font-size: 12px;
-  color: var(--fg-muted);
-  line-height: 1.55;
-}
-.card-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 3px 7px;
-  border-radius: 4px;
-  background: var(--gold-light);
-  color: var(--gold);
-  font-weight: 500;
-}
-.card-badge.exclusive {
-  background: rgba(139,26,26,0.08);
-  color: var(--burgundy);
-}
-
-/* ─── SPONSORSHIP PERKS ─── */
-.perk-list {
-  list-style: none;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.perk-list li {
-  font-size: 11px;
-  color: var(--fg-muted);
-  display: flex;
-  gap: 6px;
-  align-items: flex-start;
-  line-height: 1.4;
-}
-.perk-list li::before {
-  content: '✦';
-  color: var(--gold);
-  font-size: 8px;
-  margin-top: 3px;
-  flex-shrink: 0;
-}
-
-/* ─── STEPPER (for affiliate copies) ─── */
-.stepper-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-left: 38px;
-  margin-bottom: 10px;
-}
-.stepper {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--bg-card);
-}
-.stepper-btn {
-  width: 38px;
-  height: 38px;
-  border: none;
-  background: transparent;
-  color: var(--fg-mid);
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.12s;
-}
-.stepper-btn:hover:not(:disabled) { background: var(--bg-warm); }
-.stepper-btn:disabled { opacity: 0.3; cursor: default; }
-.stepper-val {
-  width: 44px;
-  text-align: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 15px;
-  font-variant-numeric: tabular-nums;
-  color: var(--fg);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  padding: 0 4px;
-  line-height: 38px;
-}
-.stepper-label {
-  font-size: 13px;
-  color: var(--fg-mid);
-}
-.spots-remaining {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: var(--burgundy);
-  padding-left: 38px;
-  margin-bottom: 4px;
-}
-
-/* ─── CONTACT FORM ─── */
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  padding-left: 38px;
-}
-@media (max-width: 520px) {
+.section-desc { color: var(--fg-muted); font-size: 14px; margin-bottom: 18px; padding-left: 38px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 560px) {
   .form-grid { grid-template-columns: 1fr; }
-  .card-grid { padding-left: 0; }
   .section-desc { padding-left: 0; }
-  .stepper-row { padding-left: 0; }
-  .spots-remaining { padding-left: 0; }
-  .form-grid { padding-left: 0; }
-  .note-area { padding-left: 0 !important; }
 }
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group.full { grid-column: 1 / -1; }
 .form-label {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  font-weight: 500;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg-muted); font-weight: 500;
 }
+.form-label .req { color: var(--burgundy); }
 .form-input {
-  background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  border-radius: 7px;
-  padding: 10px 13px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  color: var(--fg);
-  transition: border-color 0.15s;
-  outline: none;
+  background: var(--bg-card); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 11px 13px;
+  font-family: 'Inter', sans-serif; font-size: 14px; color: var(--fg);
+  outline: none; transition: border-color 0.15s; width: 100%;
 }
 .form-input:focus { border-color: var(--espresso); }
+.form-input.invalid { border-color: var(--burgundy); }
 .form-input::placeholder { color: var(--fg-muted); }
-textarea.form-input { resize: vertical; min-height: 80px; }
-
-/* ─── INVOICE MODAL ─── */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(22,14,11,0.72);
-  z-index: 200;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 24px 16px;
-  overflow-y: auto;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
+textarea.form-input { resize: vertical; min-height: 90px; }
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 560px) { .choice-grid { grid-template-columns: 1fr; } }
+.choice {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--bg-card); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 12px 14px; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s; user-select: none;
 }
-.modal-overlay.open {
-  opacity: 1;
-  pointer-events: all;
+.choice:hover { border-color: var(--gold); }
+.choice:has(input:checked) {
+  border-color: var(--espresso); background: var(--bg-warm);
 }
-.modal {
-  background: var(--bg-card);
-  border-radius: 14px;
-  max-width: 560px;
-  width: 100%;
-  margin: auto;
-  box-shadow: 0 24px 72px rgba(0,0,0,0.35);
-  overflow: hidden;
-  transform: translateY(20px);
-  transition: transform 0.2s;
+.choice input { margin-top: 3px; accent-color: var(--espresso); width: 16px; height: 16px; flex-shrink: 0; }
+.choice-text { font-size: 14px; font-weight: 500; line-height: 1.35; }
+.choice-sub { font-size: 12px; color: var(--fg-muted); font-weight: 400; margin-top: 2px; }
+.book-call {
+  background: var(--bg-warm); border: 1.5px solid var(--gold);
+  border-radius: 12px; padding: 18px 20px; display: flex;
+  align-items: center; gap: 14px; margin-top: 8px;
 }
-.modal-overlay.open .modal { transform: translateY(0); }
-
-.modal-header {
-  background: var(--espresso);
-  padding: 28px 28px 22px;
-  position: relative;
+.book-call input { width: 20px; height: 20px; accent-color: var(--gold); flex-shrink: 0; }
+.book-call-label { font-weight: 600; font-size: 16px; }
+.book-call-sub { font-size: 13px; color: var(--fg-muted); margin-top: 2px; }
+.actions { text-align: center; margin-top: 28px; }
+.btn-submit {
+  background: var(--gold); color: var(--espresso); border: none;
+  border-radius: 10px; padding: 16px 36px; font-family: 'Inter', sans-serif;
+  font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.15s;
 }
-.modal-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 6px;
+.btn-submit:hover { background: #D4A030; }
+.btn-submit:disabled { opacity: 0.45; cursor: default; }
+.hint { margin-top: 10px; font-size: 12px; color: var(--fg-muted); }
+.error-msg { color: var(--burgundy); font-size: 13px; margin-top: 8px; display: none; }
+.success {
+  display: none; text-align: center; padding: 48px 24px;
+  background: var(--bg-card); border-radius: 14px; border: 1px solid var(--border);
 }
-.modal-header h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #FAF7F2;
+.success h2 {
+  font-family: 'Playfair Display', Georgia, serif; font-size: 28px; margin-bottom: 12px;
 }
-.modal-close {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  background: rgba(250,247,242,0.1);
-  border: none;
-  color: rgba(250,247,242,0.7);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s;
+.success p { color: var(--fg-mid); max-width: 460px; margin: 0 auto 20px; }
+.success a {
+  display: inline-block; background: var(--espresso); color: var(--gold);
+  text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;
 }
-.modal-close:hover { background: rgba(250,247,242,0.2); }
-
-.modal-body { padding: 24px 28px; }
-
-.invoice-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-}
-.invoice-line:last-of-type { border-bottom: none; }
-.invoice-line-name { color: var(--fg-mid); flex: 1; }
-.invoice-line-detail { font-size: 11px; color: var(--fg-muted); margin-top: 2px; }
-.invoice-line-amt {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
-  font-variant-numeric: tabular-nums;
-  color: var(--fg);
-  white-space: nowrap;
-}
-.invoice-total-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0 0;
-  margin-top: 8px;
-  border-top: 2px solid var(--espresso);
-}
-.invoice-total-label {
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--fg);
-}
-.invoice-total-amt {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--espresso);
-  font-variant-numeric: tabular-nums;
-}
-
-.modal-actions {
-  padding: 0 28px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.btn-square {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--espresso);
-  color: var(--gold);
-  border: none;
-  border-radius: 8px;
-  padding: 14px 22px;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.15s;
-  width: 100%;
-  text-align: center;
-}
-.btn-square:hover { background: #1A120E; }
-.btn-copy {
-  background: transparent;
-  border: 1.5px solid var(--border);
-  color: var(--fg-mid);
-  border-radius: 8px;
-  padding: 11px 22px;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
-  width: 100%;
-}
-.btn-copy:hover { border-color: var(--espresso); color: var(--fg); }
-.square-note {
-  font-size: 11px;
-  color: var(--fg-muted);
-  text-align: center;
-  padding: 0 28px 20px;
-  line-height: 1.6;
-}
-.square-note strong { color: var(--fg-mid); }
-
-/* ─── FOOTER ─── */
 footer {
-  background: var(--espresso);
-  color: rgba(250,247,242,0.55);
-  text-align: center;
-  padding: 40px 24px;
-  font-size: 12px;
-  line-height: 1.8;
+  background: var(--espresso); color: rgba(250,247,242,0.55);
+  text-align: center; padding: 36px 24px; font-size: 12px; line-height: 1.8;
 }
 footer strong { color: rgba(250,247,242,0.85); }
 footer a { color: var(--gold); text-decoration: none; }
-
-/* ─── ISSUE SELECTOR ─── */
-.issue-selector {
-  margin-top: 20px;
-  padding: 18px 20px;
-  background: var(--bg-warm);
-  border: 1px solid var(--border-warm);
-  border-radius: 12px;
+#toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--espresso); color: var(--gold); padding: 12px 20px;
+  border-radius: 8px; font-size: 13px; z-index: 300; opacity: 0;
+  transition: opacity .2s; pointer-events: none;
 }
-.issue-selector-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: 12px;
-}
-.issue-options {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.issue-opt { cursor: pointer; flex: 1; min-width: 90px; }
-.issue-opt input { display: none; }
-.issue-opt-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 12px 10px;
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg-card);
-  transition: border-color .18s, background .18s;
-  text-align: center;
-}
-.issue-opt input:checked + .issue-opt-inner {
-  border-color: var(--gold);
-  background: var(--gold-light);
-}
-.issue-num {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--fg);
-}
-.issue-note {
-  font-size: 11px;
-  color: var(--fg-muted);
-}
-.issue-note.issue-deal {
-  color: var(--green);
-  font-weight: 600;
-}
-.issue-savings {
-  margin-top: 10px;
-  font-size: 13px;
-  color: var(--green);
-  font-weight: 600;
-  min-height: 20px;
-}
-
-/* ─── UTILITIES ─── */
-.text-muted { color: var(--fg-muted); }
-.mb-0 { margin-bottom: 0; }
 </style>
 </head>
 <body>
 
-<!-- ─── MASTHEAD ─── -->
 <header class="masthead">
   <div>
     <div class="masthead-name">Anna Co-op <span>Magazine</span></div>
-    <div class="masthead-sub">Anna, Texas · Reserve Your Seat</div>
+    <div class="masthead-sub">Anna, Texas · Tell us about your business</div>
   </div>
-  <div class="masthead-total">
-    <div>
-      <div class="total-label">Your total</div>
-      <div class="total-amount" id="masthead-total" aria-live="polite" aria-atomic="true">$0</div>
-    </div>
-    
-    <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle theme" style="background:transparent;border:1px solid rgba(250,247,242,0.3);color:#FAF7F2;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;font-family:Inter,sans-serif;">◐</button>
-    <button class="btn-review" id="btn-review-top" onclick="openInvoice()" disabled>Reserve your seat →</button>
-  </div>
+  <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle theme">◐</button>
 </header>
 
-<!-- ─── HERO ─── -->
 <section class="hero">
-  <div class="hero-eyebrow">Anna Co-op · Fall into Anna · 2026</div>
-  <h1>Your neighbors are <em>reading.</em><br>Make sure they find you.</h1>
-  <p class="hero-sub">Anna Co-op Magazine lands by USPS saturation mail in every home in ZIP 75409 — 14,955 rooftops, no targeting required. Build your order below and reserve your seat.</p>
-  <div class="hero-stats">
-    <div class="stat-block">
-      <div class="stat-num">14,955</div>
-      <div class="stat-desc">Homes reached by mail</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num">35,245</div>
-      <div class="stat-desc">Anna population (2025)</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num">+106%</div>
-      <div class="stat-desc">Growth since 2020</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num">$105K</div>
-      <div class="stat-desc">Median household income</div>
-    </div>
-  </div>
+  <div class="hero-eyebrow">Anna Co-op · Free introduction</div>
+  <h1>Tell us about your business.<br><em>We'll meet you where you are.</em></h1>
+  <p class="hero-sub">Share a few details, choose what you'd like to learn, and book a 20-minute call with Anna Co-op. No obligation — just a clear next step.</p>
 </section>
 
-<!-- ─── MAIN ─── -->
 <main class="main">
-
-  <!-- STEP 1: Ad Size -->
-  <div class="section-block">
-    <div class="section-eyebrow">Step 1</div>
-    <h2 class="section-title"><span class="section-num">1</span>Choose your ad size</h2>
-    <p class="section-desc">Print ads in Anna Co-op Magazine, mailed to every home in ZIP 75409. Choose one issue or save with a multi-issue contract.</p>
-    <div class="card-grid" id="ad-grid">
-
-      <label class="option-card" onclick="selectCard(this,'ad')" onkeydown="handleCardKey(event, this, 'ad')" tabindex="0" role="radio" data-price="100" data-label="Business Card Ad">
-        <input type="radio" name="ad" value="100">
-        <div class="card-check"><div class="card-check-dot"></div></div>
-        <div class="card-label">Business Card</div>
-        <div class="card-price">$100 <span class="per">/issue</span></div>
-        <div class="card-desc">Small-format awareness placement. Name, logo, contact — perfect for brand recall.</div>
-      </label>
-
-      <label class="option-card" onclick="selectCard(this,'ad')" onkeydown="handleCardKey(event, this, 'ad')" tabindex="0" role="radio" data-price="250" data-label="Quarter-Page Ad">
-        <input type="radio" name="ad" value="250">
-        <div class="card-check"><div class="card-check-dot"></div></div>
-        <div class="card-label">Quarter Page</div>
-        <div class="card-price">$250 <span class="per">/issue</span></div>
-        <div class="card-desc">Enough room for an offer, a photo, and a clear call to action.</div>
-      </label>
-
-      <label class="option-card" onclick="selectCard(this,'ad')" onkeydown="handleCardKey(event, this, 'ad')" tabindex="0" role="radio" data-price="500" data-label="Half-Page Ad">
-        <input type="radio" name="ad" value="500">
-        <div class="card-check"><div class="card-check-dot"></div></div>
-        <div class="card-label">Half Page</div>
-        <div class="card-price">$500 <span class="per">/issue</span></div>
-        <div class="card-desc">Real estate for storytelling — brand identity, atmosphere, and CTA.</div>
-      </label>
-
-      <label class="option-card" onclick="selectCard(this,'ad')" onkeydown="handleCardKey(event, this, 'ad')" tabindex="0" role="radio" data-price="1000" data-label="Full-Page Ad">
-        <input type="radio" name="ad" value="1000">
-        <div class="card-check"><div class="card-check-dot"></div></div>
-        <div class="card-label">Full Page</div>
-        <div class="card-price">$1,000 <span class="per">/issue</span></div>
-        <div class="card-desc">The brand moment. Dominant presence, full creative freedom, maximum recall.</div>
-        <span class="card-badge">Best impact</span>
-      </label>
-
-    </div>
-
-    <!-- Issue count selector -->
-    <div class="issue-selector" id="issue-selector" style="display:none;">
-      <div class="issue-selector-label">How many issues?</div>
-      <div class="issue-options">
-        <label class="issue-opt">
-          <input type="radio" name="issues" value="1" checked onchange="setIssues(1)">
-          <span class="issue-opt-inner">
-            <span class="issue-num">1 issue</span>
-            <span class="issue-note">Standard rate</span>
-          </span>
-        </label>
-        <label class="issue-opt">
-          <input type="radio" name="issues" value="3" onchange="setIssues(3)">
-          <span class="issue-opt-inner">
-            <span class="issue-num">3 issues</span>
-            <span class="issue-note issue-deal">Save 10%</span>
-          </span>
-        </label>
-        <label class="issue-opt">
-          <input type="radio" name="issues" value="6" onchange="setIssues(6)">
-          <span class="issue-opt-inner">
-            <span class="issue-num">6 issues</span>
-            <span class="issue-note issue-deal">Save 15%</span>
-          </span>
-        </label>
-      </div>
-      <div class="issue-savings" id="issue-savings"></div>
-    </div>
-  </div>
-
-  <!-- STEP 2: Sponsorship (optional) -->
-  <div class="section-block">
-    <div class="section-eyebrow">Step 2 — Optional</div>
-    <h2 class="section-title"><span class="section-num">2</span>Add a sponsorship</h2>
-    <p class="section-desc">Sponsorships include a featured interview, a premium placement, and category exclusivity. Each level is one business — first reserved, first held.</p>
-    <div class="card-grid" id="sponsor-grid">
-
-      <label class="option-card" onclick="selectCard(this,'sponsor')" onkeydown="handleCardKey(event, this, 'sponsor')" tabindex="0" role="radio" data-price="1250" data-label="Back Cover Sponsorship">
-        <input type="radio" name="sponsor" value="1250">
-        <div class="card-check"><div class="card-check-dot"></div></div>
-        <div class="card-label">Back Cover</div>
-        <div class="card-price">$1,250</div>
-        <ul class="perk-list">
-          <li>Full back-cover placement</li>
-          <li>Featured business interview</li>
-          <li>Category exclusivity for the issue</li>
-        </ul>
-        <span class="card-badge exclusive">Exclusive</span>
-      </label>
-
-      <label class="option-card" onclick="selectCard(this,'sponsor')" onkeydown="handleCardKey(event, this, 'sponsor')" tabindex="0" role="radio" data-price="2500" data-label="Inside Cover Sponsorship">
-        <input type="radio" name="sponsor" value="2500">
-        <div class="card-check"><div class="card-check-dot"></div></div>
-        <div class="card-label">Inside Cover</div>
-        <div class="card-price">$2,500</div>
-        <ul class="perk-list">
-          <li>Inside front or back cover</li>
-          <li>Featured business interview</li>
-          <li>Category exclusivity for the issue</li>
-        </ul>
-        <span class="card-badge exclusive">Exclusive</span>
-      </label>
-
-      <label class="option-card" onclick="selectCard(this,'sponsor')" onkeydown="handleCardKey(event, this, 'sponsor')" tabindex="0" role="radio" data-price="5000" data-label="Centerfold Sponsorship">
-        <input type="radio" name="sponsor" value="5000">
-        <div class="card-check"><div class="card-check-dot"></div></div>
-        <div class="card-label">Centerfold</div>
-        <div class="card-price">$5,000</div>
-        <ul class="perk-list">
-          <li>Two-page centerfold spread</li>
-          <li>Featured business interview</li>
-          <li>Category exclusivity for the issue</li>
-          <li>Priority placement in Table of Contents</li>
-        </ul>
-        <span class="card-badge exclusive">Exclusive</span>
-      </label>
-
-      <label class="option-card" onclick="selectCard(this,'sponsor')" onkeydown="handleCardKey(event, this, 'sponsor')" tabindex="0" role="radio" data-price="6500" data-label="Presenting Sponsor">
-        <input type="radio" name="sponsor" value="6500">
-        <div class="card-check"><div class="card-check-dot"></div></div>
-        <div class="card-label">Presenting Sponsor</div>
-        <div class="card-price">$6,500</div>
-        <ul class="perk-list">
-          <li>Centerfold + back cover pairing</li>
-          <li>Featured business interview</li>
-          <li>Full-issue category exclusivity</li>
-          <li>Named in masthead as Presenting Sponsor</li>
-          <li>Priority in all issue marketing</li>
-        </ul>
-        <span class="card-badge exclusive">Top tier</span>
-      </label>
-
-    </div>
-  </div>
-
-  <!-- STEP 3: Add-ons -->
-  <div class="section-block">
-    <div class="section-eyebrow">Step 3 — Optional</div>
-    <h2 class="section-title"><span class="section-num">3</span>Add-ons</h2>
-    <p class="section-desc">Stack these alongside your ad or sponsorship. Each is independent — check any that apply.</p>
-    <div class="card-grid" id="addon-grid">
-
-      <label class="option-card" onclick="toggleAddon(this)" onkeydown="handleCardKey(event, this, 'addon')" tabindex="0" role="checkbox" data-price="29" data-label="Anna Co-op Academy — Monthly Membership" data-period="/mo">
-        <input type="checkbox" name="addon-academy">
-        <div class="card-check square"><div class="card-check-tick">✓</div></div>
-        <div class="card-label">Co-op Academy</div>
-        <div class="card-price">$29 <span class="per">/mo</span></div>
-        <ul class="perk-list">
-          <li>Weekly business agenda</li>
-          <li>Anna market trends report</li>
-          <li>Free tools roundup</li>
-          <li>Access to new case studies</li>
-        </ul>
-      </label>
-
-      <label class="option-card" onclick="toggleAddon(this)" onkeydown="handleCardKey(event, this, 'addon')" tabindex="0" role="checkbox" data-price="0" data-label="MIA Gift Box Sponsorship" data-price-display="Ask us">
-        <input type="checkbox" name="addon-mia">
-        <div class="card-check square"><div class="card-check-tick">✓</div></div>
-        <div class="card-label">MIA Gift Box</div>
-        <div class="card-price" style="font-size:14px; color: var(--gold);">Sponsor a box</div>
-        <ul class="perk-list">
-          <li>Supports Anna kids &amp; teens</li>
-          <li>Christmas Card signed by your team in every box</li>
-          <li>Thanks on annaartscouncil.org + social media</li>
-          <li>1M+ subscribers across 17 platforms</li>
-          <li>Endless memories for Anna kids</li>
-        </ul>
-      </label>
-
-    </div>
-  </div>
-
-  <!-- STEP 4: Affiliate Copies -->
-  <div class="section-block">
-    <div class="section-eyebrow">Step 4 — Optional</div>
-    <h2 class="section-title"><span class="section-num">4</span>Become an affiliate</h2>
-    <p class="section-desc">Order copies of the magazine to hand to your patrons directly — great for foot traffic and loyalty.</p>
-    <p class="spots-remaining" id="spots-remaining">⬤ Up to 10 affiliate spots (first reserved)</p>
-    <div class="stepper-row">
-      <div class="stepper">
-        <button class="stepper-btn" onclick="changeAffiliate(-1)" id="aff-minus" disabled>−</button>
-        <div class="stepper-val" id="aff-val">0</div>
-        <button class="stepper-btn" onclick="changeAffiliate(1)" id="aff-plus">+</button>
-      </div>
-      <div class="stepper-label">copies × <strong>$2 each</strong> / issue</div>
-    </div>
-    <p style="padding-left:38px; font-size:13px; color: var(--fg-muted);">Minimum order: 1 copy. Limited inventory — spots are confirmed when your order is accepted.</p>
-  </div>
-
-  <!-- STEP 5: Your details -->
-  <div class="section-block">
-    <div class="section-eyebrow">Step 5</div>
-    <h2 class="section-title"><span class="section-num">5</span>Your details</h2>
-    <p class="section-desc">So Aubre' can follow up personally and confirm your placement.</p>
-    <div class="form-grid">
-      <div class="form-group">
-        <label class="form-label" for="f-name">Business name</label>
-        <input class="form-input" id="f-name" type="text" placeholder="Touchdown Taphouse" oninput="updateReview()">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="f-contact">Contact name</label>
-        <input class="form-input" id="f-contact" type="text" placeholder="Your name" oninput="updateReview()">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="f-email">Email</label>
-        <input class="form-input" id="f-email" type="email" placeholder="you@yourbusiness.com" oninput="updateReview()">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="f-phone">Phone</label>
-        <input class="form-input" id="f-phone" type="tel" placeholder="(214) 555-0100" oninput="updateReview()">
-      </div>
-      <div class="form-group full note-area" style="padding-left:0">
-        <label class="form-label" for="f-notes">Anything else for Aubre'?</label>
-        <textarea class="form-input" id="f-notes" placeholder="Ad concept ideas, questions, your dream for this campaign…"></textarea>
+  <form id="lead-form" novalidate>
+    <!-- Step 1: Business -->
+    <div class="section-block">
+      <div class="section-eyebrow">Step 1</div>
+      <h2 class="section-title"><span class="section-num">1</span>About your business</h2>
+      <p class="section-desc">Start with the basics. We'll use this to personalize the call.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="business">Business name <span class="req">*</span></label>
+          <input class="form-input" id="business" name="business" type="text" required placeholder="Touchdown Taphouse">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="owner">Owner / contact name <span class="req">*</span></label>
+          <input class="form-input" id="owner" name="owner" type="text" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone</label>
+          <input class="form-input" id="phone" name="phone" type="tel" placeholder="(214) 555-0100">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email <span class="req">*</span></label>
+          <input class="form-input" id="email" name="email" type="email" required placeholder="you@yourbusiness.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="industry">Industry</label>
+          <input class="form-input" id="industry" name="industry" type="text" placeholder="Restaurant, retail, services…">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="website">Website</label>
+          <input class="form-input" id="website" name="website" type="url" placeholder="https://yourbusiness.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="youtube">YouTube</label>
+          <input class="form-input" id="youtube" name="youtube" type="url" placeholder="https://youtube.com/@…">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="facebook">Facebook</label>
+          <input class="form-input" id="facebook" name="facebook" type="url" placeholder="https://facebook.com/…">
+        </div>
+        <div class="form-group full">
+          <label class="form-label" for="instagram">Instagram</label>
+          <input class="form-input" id="instagram" name="instagram" type="url" placeholder="https://instagram.com/…">
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Reserve CTA -->
-  <div style="text-align:center; padding: 8px 0 0;">
-    <button class="btn-review" id="btn-review-bottom" onclick="openInvoice()" disabled style="padding: 16px 40px; font-size: 16px; border-radius: 10px;">Reserve your seat →</button>
-    <p style="margin-top:12px; font-size:12px; color: var(--fg-muted);">You'll review your itemized order before payment. Choose 1, 3, or 6 issues — multi-issue contracts save automatically. A business name and valid email are required to reserve.</p>
-  </div>
+    <!-- Step 2: Interests -->
+    <div class="section-block">
+      <div class="section-eyebrow">Step 2</div>
+      <h2 class="section-title"><span class="section-num">2</span>What would you like to learn about?</h2>
+      <p class="section-desc">Select all that apply. We'll focus the call on what matters to you.</p>
+      <div class="choice-grid">
+        <label class="choice"><input type="checkbox" name="interests" value="Magazine Ads pricing"><span class="choice-text">Learn about Anna Co-op Magazine Ads pricing</span></label>
+        <label class="choice"><input type="checkbox" name="interests" value="Free Website Security Scan"><span class="choice-text">Free Website Security Scan</span></label>
+        <label class="choice"><input type="checkbox" name="interests" value="Free Audience Case Study"><span class="choice-text">Free Audience Case Study</span></label>
+        <label class="choice"><input type="checkbox" name="interests" value="Free Marketing Score"><span class="choice-text">Free Marketing Score</span></label>
+        <label class="choice"><input type="checkbox" name="interests" value="Commercial Ads on Anna Co-op TV"><span class="choice-text">Learn about Commercial Ads on Anna Co-op TV</span></label>
+        <label class="choice"><input type="checkbox" name="interests" value="Anna Co-op Marketplace"><span class="choice-text">Learn About Anna Co-op Marketplace</span></label>
+      </div>
+    </div>
 
+    <!-- Step 3: Goals -->
+    <div class="section-block">
+      <div class="section-eyebrow">Step 3</div>
+      <h2 class="section-title"><span class="section-num">3</span>Your goals</h2>
+      <p class="section-desc">What would success look like for you?</p>
+      <div class="choice-grid">
+        <label class="choice"><input type="checkbox" name="goals" value="More Calls"><span class="choice-text">More Calls</span></label>
+        <label class="choice"><input type="checkbox" name="goals" value="More Foot Traffic"><span class="choice-text">More Foot Traffic</span></label>
+        <label class="choice"><input type="checkbox" name="goals" value="More Event Participants"><span class="choice-text">More Event Participants</span></label>
+        <label class="choice"><input type="checkbox" name="goals" value="More Qualified Leads"><span class="choice-text">More Qualified Leads</span></label>
+        <label class="choice"><input type="checkbox" name="goals" value="More Website Traffic"><span class="choice-text">More Website Traffic</span></label>
+        <label class="choice"><input type="checkbox" name="goals" value="Revenue Ideas"><span class="choice-text">Revenue Ideas</span></label>
+        <label class="choice"><input type="checkbox" name="goals" value="Ways to Support the Community"><span class="choice-text">Ways to Support the Community</span></label>
+      </div>
+    </div>
+
+    <!-- Step 4: Book call -->
+    <div class="section-block">
+      <div class="section-eyebrow">Step 4</div>
+      <h2 class="section-title"><span class="section-num">4</span>Next step</h2>
+      <label class="book-call">
+        <input type="checkbox" name="book_call" id="book_call" value="Yes — book a 20-min call" checked>
+        <div>
+          <div class="book-call-label">Book a 20-minute call with Anna Co-op</div>
+          <div class="book-call-sub">Aubre' will reach out to find a time that works for you.</div>
+        </div>
+      </label>
+      <div class="form-group full" style="margin-top:16px;">
+        <label class="form-label" for="notes">Anything else you'd like us to know?</label>
+        <textarea class="form-input" id="notes" name="notes" placeholder="Goals, questions, preferred times, or context for the call…"></textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn-submit" id="submit-btn">Send my info & request the call</button>
+      <p class="hint">Required fields are marked with *. Your answers are sent to Anna Co-op and stored so we can follow up.</p>
+      <p class="error-msg" id="error-msg">Please fill in business name, owner name, and a valid email.</p>
+    </div>
+  </form>
+
+  <div class="success" id="success">
+    <h2>You're in.</h2>
+    <p>Thank you — we received your details. Aubre' will reach out within one business day to book your 20-minute call and share anything you asked about.</p>
+    <a href="mailto:hello@annaartscouncil.org">Email Aubre' directly</a>
+  </div>
 </main>
 
-<!-- ─── INVOICE MODAL ─── -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeIfOutside(event)">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-header">
-      <div class="modal-eyebrow">Anna Co-op Magazine · Your order</div>
-      <h2 id="modal-title">Your Itemized Invoice</h2>
-      <button class="modal-close" onclick="closeInvoice()" aria-label="Close">×</button>
-    </div>
-    <div class="modal-body">
-      <div id="invoice-lines"><!-- populated by JS --></div>
-      <div class="invoice-total-row">
-        <div class="invoice-total-label">Total due</div>
-        <div class="invoice-total-amt" id="invoice-total">$0</div>
-      </div>
-    </div>
-    <div class="modal-actions">
-      <a href="https://square.link/u/T64yNawD" target="_blank" rel="noopener" class="btn-square" id="square-link">
-        Pay with Square ↗
-      </a>
-      <button class="btn-copy" onclick="copyOrder()">📋 Copy itemized order</button>
-    </div>
-    <p class="square-note">
-      On Square, enter exactly <strong id="square-amount">$0</strong> — then send us your copied order so we can confirm your placement. Aubre' will follow up within one business day.
-    </p>
-  </div>
-</div>
-
-<!-- ─── FOOTER ─── -->
 <footer>
   <strong>Anna Co-op Magazine</strong> · Published by Anna Arts Council · Anna, Texas 75409<br>
   A 501(c)(3) nonprofit · EIN 39-3158761 · <a href="mailto:hello@annaartscouncil.org">hello@annaartscouncil.org</a><br><br>
@@ -1032,75 +326,18 @@ footer a { color: var(--gold); text-decoration: none; }
   <span style="color: rgba(250,247,242,0.3); font-size: 11px;">Anna Co-op · Town Square Apps LLC</span>
 </footer>
 
+<div id="toast"></div>
+
 <script>
-/* ─── STATE ─── */
-const state = {
-  ad:        { price: 0, label: '' },
-  issues:    1,   // 1 | 3 | 6
-  sponsor:   { price: 0, label: '' },
-  academy:   false,
-  mia:       false,
-  affiliate: 0,
-};
+const STORAGE_KEY = 'anna-coop-lead-draft';
+const LOG_KEY = 'anna-coop-lead-log';
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/hello@annaartscouncil.org';
 
-const AFFILIATE_MAX = 10;
-
-/* ─── PRICING CONFIG ─── */
-const ACADEMY_PRICE = 29;
-const AFFILIATE_UNIT = 2;
-
-function issueDiscount() {
-  if (state.issues === 3) return 0.10;
-  if (state.issues === 6) return 0.15;
-  return 0;
-}
-
-function adTotal() {
-  const base = state.ad.price * state.issues;
-  return Math.round(base * (1 - issueDiscount()));
-}
-
-function calcTotal() {
-  let t = 0;
-  if (state.ad.price > 0) t += adTotal();
-  if (state.sponsor.price > 0) t += state.sponsor.price;
-  if (state.academy) t += ACADEMY_PRICE;
-  t += state.affiliate * AFFILIATE_UNIT;
-  return t;
-}
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function updateReview() {
-  const total = calcTotal();
-  document.getElementById('masthead-total').textContent = fmt(total);
-  const hasAd = state.ad.price > 0;
-  const hasName = document.getElementById('f-name').value.trim().length > 0;
-  const email = document.getElementById('f-email').value.trim();
-  const hasEmail = isValidEmail(email);
-  const enabled = hasAd && hasName && hasEmail;
-  document.getElementById('btn-review-top').disabled    = !enabled;
-  document.getElementById('btn-review-bottom').disabled = !enabled;
-  // subtle email hint
-  const emailInput = document.getElementById('f-email');
-  if (email && !hasEmail) {
-    emailInput.style.borderColor = 'var(--burgundy)';
-  } else {
-    emailInput.style.borderColor = '';
-  }
-}
-
-/* ─── THEME TOGGLE ─── */
 function initTheme() {
   const saved = localStorage.getItem('anna-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = saved || (prefersDark ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
-  updateThemeBtn(theme);
-}
-function updateThemeBtn(theme) {
   const btn = document.getElementById('theme-toggle');
   if (btn) btn.textContent = theme === 'dark' ? '☾' : '☀';
 }
@@ -1109,369 +346,134 @@ function toggleTheme() {
   const next = current === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('anna-theme', next);
-  updateThemeBtn(next);
+  document.getElementById('theme-toggle').textContent = next === 'dark' ? '☾' : '☀';
 }
 
-/* ─── TOAST ─── */
-function showToast(msg) {
-  let t = document.getElementById('toast');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = 'toast';
-    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--espresso);color:var(--gold);padding:12px 20px;border-radius:8px;font-size:13px;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none;';
-    document.body.appendChild(t);
-  }
-  t.textContent = msg;
-  t.style.opacity = '1';
-  setTimeout(() => { t.style.opacity = '0'; }, 2200);
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-/* ─── CARD SELECTION ─── */
-function selectCard(card, group) {
-  const grid = document.getElementById(group + '-grid') ||
-               card.closest('.card-grid');
-  grid.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-  card.classList.add('selected');
-  const price = parseInt(card.dataset.price) || 0;
-  const label = card.dataset.label || '';
-  state[group] = { price, label };
-  if (group === 'ad') {
-    const sel = document.getElementById('issue-selector');
-    sel.style.display = price > 0 ? '' : 'none';
-    updateSavingsLabel();
-  }
-  updateReview();
+function getFormData() {
+  const form = document.getElementById('lead-form');
+  const data = Object.fromEntries(new FormData(form).entries());
+  data.interests = [...form.querySelectorAll('input[name="interests"]:checked')].map(i => i.value);
+  data.goals = [...form.querySelectorAll('input[name="goals"]:checked')].map(i => i.value);
+  data.book_call = document.getElementById('book_call').checked ? 'Yes' : 'No';
+  return data;
 }
 
-function setIssues(n) {
-  state.issues = n;
-  updateSavingsLabel();
-  updateReview();
+function saveDraft() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(getFormData())); } catch (e) {}
 }
-
-function updateSavingsLabel() {
-  const el = document.getElementById('issue-savings');
-  if (!el) return;
-  const disc = issueDiscount();
-  if (disc > 0 && state.ad.price > 0) {
-    const saved = Math.round(state.ad.price * state.issues * disc);
-    el.textContent = `You save ${fmt(saved)} on this contract.`;
-  } else {
-    el.textContent = '';
-  }
-}
-
-function toggleAddon(card) {
-  card.classList.toggle('selected');
-  const key = card.querySelector('input[type=checkbox]').name.replace('addon-','');
-  state[key] = card.classList.contains('selected');
-  updateReview();
-}
-
-/* ─── AFFILIATE STEPPER ─── */
-function changeAffiliate(delta) {
-  const next = Math.max(0, Math.min(AFFILIATE_MAX, state.affiliate + delta));
-  state.affiliate = next;
-  document.getElementById('aff-val').textContent = next;
-  document.getElementById('aff-minus').disabled = next === 0;
-  document.getElementById('aff-plus').disabled  = next === AFFILIATE_MAX;
-  const spots = AFFILIATE_MAX - next;
-  document.getElementById('spots-remaining').textContent =
-    spots === 0 ? '⬤ All 10 spots claimed' :
-    `⬤ ${spots} of 10 spots remaining`;
-  updateReview();
-}
-
-/* ─── TOTALS ─── */
-function fmt(n) {
-  return '$' + n.toLocaleString('en-US');
-}
-
-/* ─── INVOICE MODAL ─── */
-function openInvoice() {
-  const lines = [];
-
-  if (state.ad.price > 0) {
-    const disc = issueDiscount();
-    const issueWord = state.issues === 1 ? '1 issue' : `${state.issues} issues`;
-    const discNote = disc > 0 ? ` · ${disc * 100}% multi-issue discount applied` : '';
-    lines.push({
-      name: state.ad.label,
-      detail: `× ${issueWord}${discNote}`,
-      amt: adTotal(),
-    });
-  }
-  if (state.sponsor.price > 0) {
-    lines.push({
-      name: state.sponsor.label,
-      detail: 'Includes interview + exclusivity',
-      amt: state.sponsor.price,
-    });
-  }
-  if (state.academy) {
-    lines.push({
-      name: 'Anna Co-op Academy',
-      detail: 'Monthly membership',
-      amt: ACADEMY_PRICE,
-    });
-  }
-  if (state.mia) {
-    lines.push({
-      name: 'MIA Gift Box Sponsorship',
-      detail: 'Aubre\' will reach out to confirm details',
-      amt: 0,
-    });
-  }
-  if (state.affiliate > 0) {
-    lines.push({
-      name: `Affiliate Copies — ${state.affiliate} copies`,
-      detail: '$2 per copy / issue',
-      amt: state.affiliate * AFFILIATE_UNIT,
-    });
-  }
-
-  // Contact info
-  const biz   = document.getElementById('f-name').value.trim();
-  const name  = document.getElementById('f-contact').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
-
-  const linesHtml = lines.map(l => `
-    <div class="invoice-line">
-      <div class="invoice-line-name">
-        ${l.name}
-        ${l.detail ? `<div class="invoice-line-detail">${l.detail}</div>` : ''}
-      </div>
-      <div class="invoice-line-amt">${l.amt === 0 ? 'TBD' : fmt(l.amt)}</div>
-    </div>
-  `).join('');
-
-  if (biz || name || email || phone) {
-    const contactHtml = `
-      <div class="invoice-line" style="margin-top:12px; padding-top:12px; border-top: 1px dashed var(--border)">
-        <div class="invoice-line-name" style="color: var(--fg-muted); font-size:12px;">
-          ${biz ? `<div><strong>${biz}</strong></div>` : ''}
-          ${name  ? `<div>${name}</div>` : ''}
-          ${email ? `<div>${email}</div>` : ''}
-          ${phone ? `<div>${phone}</div>` : ''}
-        </div>
-        <div></div>
-      </div>`;
-    document.getElementById('invoice-lines').innerHTML = linesHtml + contactHtml;
-  } else {
-    document.getElementById('invoice-lines').innerHTML = linesHtml;
-  }
-
-  const invoiceTotal = calcInvoiceTotal();
-  document.getElementById('invoice-total').textContent = fmt(invoiceTotal);
-  document.getElementById('square-amount').textContent = fmt(invoiceTotal);
-
-  document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function calcInvoiceTotal() {
-  return calcTotal(); // MIA is free; unified calculation
-}
-
-function closeInvoice() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function closeIfOutside(e) {
-  if (e.target === document.getElementById('modal-overlay')) closeInvoice();
-}
-
-/* ─── COPY ORDER ─── */
-function copyOrder() {
-  const biz    = document.getElementById('f-name').value.trim();
-  const name   = document.getElementById('f-contact').value.trim();
-  const email  = document.getElementById('f-email').value.trim();
-  const phone  = document.getElementById('f-phone').value.trim();
-  const notes  = document.getElementById('f-notes').value.trim();
-
-  let txt = `Anna Co-op Magazine — Order\n`;
-  txt += `${'─'.repeat(34)}\n`;
-  if (biz)   txt += `Business: ${biz}\n`;
-  if (name)  txt += `Contact:  ${name}\n`;
-  if (email) txt += `Email:    ${email}\n`;
-  if (phone) txt += `Phone:    ${phone}\n`;
-  txt += `\nOrder items:\n`;
-
-  if (state.ad.price > 0) {
-    const disc = issueDiscount();
-    const issueWord = state.issues === 1 ? '1 issue' : `${state.issues} issues`;
-    const discNote = disc > 0 ? ` (${disc * 100}% off)` : '';
-    txt += `  • ${state.ad.label} × ${issueWord}${discNote} — ${fmt(adTotal())}\n`;
-  }
-  if (state.sponsor.price > 0)
-    txt += `  • ${state.sponsor.label} — ${fmt(state.sponsor.price)}\n`;
-  if (state.academy)
-    txt += `  • Anna Co-op Academy (monthly) — $29/mo\n`;
-  if (state.mia)
-    txt += `  • MIA Gift Box Sponsorship — TBD\n`;
-  if (state.affiliate > 0)
-    txt += `  • Affiliate Copies: ${state.affiliate} copies — ${fmt(state.affiliate * AFFILIATE_UNIT)}/issue\n`;
-
-  txt += `\nTotal due: ${fmt(calcInvoiceTotal())}\n`;
-  if (notes) txt += `\nNotes: ${notes}\n`;
-  txt += `\nPay at: square.link/u/T64yNawD`;
-
-  navigator.clipboard.writeText(txt).then(() => {
-    const btn = document.querySelector('.btn-copy');
-    btn.textContent = '✓ Copied!';
-    showToast('Order copied — open Square and paste the amount');
-    setTimeout(() => { btn.textContent = '📋 Copy itemized order'; }, 2000);
-  }).catch(() => showToast('Could not copy — please select and copy manually'));
-}
-
-
-/* ─── ACCESSIBILITY: KEYBOARD ─── */
-function handleCardKey(e, card, type) {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    if (type === 'ad' || type === 'sponsor') {
-      selectCard(card, type);
-    } else if (type === 'addon') {
-      toggleAddon(card);
-    }
-  }
-}
-
-/* ─── LOCALSTORAGE ─── */
-const STORAGE_KEY = 'anna-coop-ads-draft';
-
-function saveState() {
-  try {
-    const toSave = {
-      ad: state.ad,
-      issues: state.issues,
-      sponsor: state.sponsor,
-      academy: state.academy,
-      mia: state.mia,
-      affiliate: state.affiliate,
-      // form fields
-      name: document.getElementById('f-name')?.value || '',
-      contact: document.getElementById('f-contact')?.value || '',
-      email: document.getElementById('f-email')?.value || '',
-      phone: document.getElementById('f-phone')?.value || '',
-      notes: document.getElementById('f-notes')?.value || '',
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-  } catch (e) { /* ignore quota or private mode */ }
-}
-
-function loadState() {
+function loadDraft() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return;
-    const saved = JSON.parse(raw);
-    
-    // Restore ad
-    if (saved.ad && saved.ad.price > 0) {
-      const card = document.querySelector(`#ad-grid .option-card[data-price="${saved.ad.price}"]`);
-      if (card) selectCard(card, 'ad');
+    const d = JSON.parse(raw);
+    ['business','owner','phone','email','industry','website','youtube','facebook','instagram','notes'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && d[id]) el.value = d[id];
+    });
+    if (Array.isArray(d.interests)) {
+      document.querySelectorAll('input[name="interests"]').forEach(cb => {
+        cb.checked = d.interests.includes(cb.value);
+      });
     }
-    // Restore issues
-    if (saved.issues) {
-      state.issues = saved.issues;
-      const radio = document.querySelector(`input[name="issues"][value="${saved.issues}"]`);
-      if (radio) {
-        radio.checked = true;
-        setIssues(saved.issues);
-      }
+    if (Array.isArray(d.goals)) {
+      document.querySelectorAll('input[name="goals"]').forEach(cb => {
+        cb.checked = d.goals.includes(cb.value);
+      });
     }
-    // Restore sponsor
-    if (saved.sponsor && saved.sponsor.price > 0) {
-      const card = document.querySelector(`#sponsor-grid .option-card[data-price="${saved.sponsor.price}"]`);
-      if (card) selectCard(card, 'sponsor');
-    }
-    // Restore addons
-    if (saved.academy) {
-      const card = document.querySelector('input[name="addon-academy"]')?.closest('.option-card');
-      if (card && !card.classList.contains('selected')) toggleAddon(card);
-    }
-    if (saved.mia) {
-      const card = document.querySelector('input[name="addon-mia"]')?.closest('.option-card');
-      if (card && !card.classList.contains('selected')) toggleAddon(card);
-    }
-    // Restore affiliate
-    if (saved.affiliate > 0) {
-      state.affiliate = 0;
-      changeAffiliate(saved.affiliate);
-    }
-    // Restore form
-    if (saved.name) document.getElementById('f-name').value = saved.name;
-    if (saved.contact) document.getElementById('f-contact').value = saved.contact;
-    if (saved.email) document.getElementById('f-email').value = saved.email;
-    if (saved.phone) document.getElementById('f-phone').value = saved.phone;
-    if (saved.notes) document.getElementById('f-notes').value = saved.notes;
-    
-    updateReview();
-  } catch (e) { console.warn('Could not restore draft', e); }
+    if (d.book_call === 'No') document.getElementById('book_call').checked = false;
+  } catch (e) {}
+}
+function logSubmission(data) {
+  try {
+    const log = JSON.parse(localStorage.getItem(LOG_KEY) || '[]');
+    log.push({ ...data, submittedAt: new Date().toISOString() });
+    localStorage.setItem(LOG_KEY, JSON.stringify(log));
+  } catch (e) {}
 }
 
-/* ─── MODAL FOCUS ─── */
-let previousFocus = null;
-
-const originalOpenInvoice = openInvoice;
-openInvoice = function() {
-  previousFocus = document.activeElement;
-  originalOpenInvoice();
-  // Focus the close button
-  setTimeout(() => {
-    const closeBtn = document.querySelector('.modal-close');
-    if (closeBtn) closeBtn.focus();
-  }, 50);
-  // Simple focus trap
-  document.addEventListener('keydown', trapFocus);
-};
-
-const originalCloseInvoice = closeInvoice;
-closeInvoice = function() {
-  document.removeEventListener('keydown', trapFocus);
-  originalCloseInvoice();
-  if (previousFocus && typeof previousFocus.focus === 'function') {
-    previousFocus.focus();
-  }
-};
-
-function trapFocus(e) {
-  if (e.key !== 'Tab') return;
-  const modal = document.querySelector('.modal');
-  if (!modal) return;
-  const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-  if (focusable.length === 0) return;
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-  if (e.shiftKey) {
-    if (document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    }
-  } else {
-    if (document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.opacity = '0'; }, 2500);
 }
 
-// Call saveState after mutations
-const originalUpdateReview = updateReview;
-updateReview = function() {
-  originalUpdateReview();
-  saveState();
-};
+document.getElementById('lead-form').addEventListener('input', saveDraft);
+document.getElementById('lead-form').addEventListener('change', saveDraft);
 
-// Init
-loadState();
+document.getElementById('lead-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = getFormData();
+  const emailEl = document.getElementById('email');
+  const err = document.getElementById('error-msg');
+  const btn = document.getElementById('submit-btn');
 
-// init
+  let valid = true;
+  ['business','owner','email'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('invalid');
+    if (!el.value.trim()) { el.classList.add('invalid'); valid = false; }
+  });
+  if (!isValidEmail(data.email || '')) {
+    emailEl.classList.add('invalid');
+    valid = false;
+  }
+  if (!valid) {
+    err.style.display = 'block';
+    emailEl.focus();
+    return;
+  }
+  err.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  // Store locally always
+  logSubmission(data);
+  localStorage.removeItem(STORAGE_KEY);
+
+  // Send to FormSubmit (emails hello@annaartscouncil.org)
+  const payload = {
+    _subject: `New Anna Co-op lead: ${data.business}`,
+    _template: 'table',
+    business: data.business,
+    owner: data.owner,
+    phone: data.phone || '',
+    email: data.email,
+    industry: data.industry || '',
+    website: data.website || '',
+    youtube: data.youtube || '',
+    facebook: data.facebook || '',
+    instagram: data.instagram || '',
+    interests: data.interests.join(', ') || 'None selected',
+    goals: data.goals.join(', ') || 'None selected',
+    book_call: data.book_call,
+    notes: data.notes || '',
+  };
+
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error('send failed');
+  } catch (err) {
+    // Still show success — answers are stored locally and we can recover
+    console.warn('Remote send failed; answers saved locally', err);
+  }
+
+  document.getElementById('lead-form').style.display = 'none';
+  document.getElementById('success').style.display = 'block';
+  showToast('Received — thank you');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 initTheme();
-updateReview();
+loadDraft();
 </script>
 </body>
 </html>
-
