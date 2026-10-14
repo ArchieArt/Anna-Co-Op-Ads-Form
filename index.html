@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Reserve your ad or sponsorship in Anna Co-op Magazine. Reaches every home in ZIP 75409 by USPS saturation mail. Build your order and reserve your seat.">
+<meta name="theme-color" content="#352D27">
+<meta property="og:title" content="Anna Co-op · Reserve Your Seat">
+<meta property="og:description" content="Print ads and sponsorships in Anna Co-op Magazine — mailed to every home in ZIP 75409.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anna-co-op-ads-form.vercel.app">
+
 <title>Anna Co-op · Reserve Your Seat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -728,6 +735,8 @@ footer a { color: var(--gold); text-decoration: none; }
       <div class="total-label">Your total</div>
       <div class="total-amount" id="masthead-total" aria-live="polite" aria-atomic="true">$0</div>
     </div>
+    
+    <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle theme" style="background:transparent;border:1px solid rgba(250,247,242,0.3);color:#FAF7F2;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;font-family:Inter,sans-serif;">◐</button>
     <button class="btn-review" id="btn-review-top" onclick="openInvoice()" disabled>Reserve your seat →</button>
   </div>
 </header>
@@ -939,7 +948,7 @@ footer a { color: var(--gold); text-decoration: none; }
     <div class="section-eyebrow">Step 4 — Optional</div>
     <h2 class="section-title"><span class="section-num">4</span>Become an affiliate</h2>
     <p class="section-desc">Order copies of the magazine to hand to your patrons directly — great for foot traffic and loyalty.</p>
-    <p class="spots-remaining" id="spots-remaining">⬤ Only 10 spots available</p>
+    <p class="spots-remaining" id="spots-remaining">⬤ Up to 10 affiliate spots (first reserved)</p>
     <div class="stepper-row">
       <div class="stepper">
         <button class="stepper-btn" onclick="changeAffiliate(-1)" id="aff-minus" disabled>−</button>
@@ -948,7 +957,7 @@ footer a { color: var(--gold); text-decoration: none; }
       </div>
       <div class="stepper-label">copies × <strong>$2 each</strong> / issue</div>
     </div>
-    <p style="padding-left:38px; font-size:13px; color: var(--fg-muted);">Minimum order: 1 copy. Maximum: limited by spots remaining (10 total across all affiliates).</p>
+    <p style="padding-left:38px; font-size:13px; color: var(--fg-muted);">Minimum order: 1 copy. Limited inventory — spots are confirmed when your order is accepted.</p>
   </div>
 
   <!-- STEP 5: Your details -->
@@ -983,7 +992,7 @@ footer a { color: var(--gold); text-decoration: none; }
   <!-- Reserve CTA -->
   <div style="text-align:center; padding: 8px 0 0;">
     <button class="btn-review" id="btn-review-bottom" onclick="openInvoice()" disabled style="padding: 16px 40px; font-size: 16px; border-radius: 10px;">Reserve your seat →</button>
-    <p style="margin-top:12px; font-size:12px; color: var(--fg-muted);">You'll review your itemized order before payment. Choose 1, 3, or 6 issues — multi-issue contracts save automatically.</p>
+    <p style="margin-top:12px; font-size:12px; color: var(--fg-muted);">You'll review your itemized order before payment. Choose 1, 3, or 6 issues — multi-issue contracts save automatically. A business name and valid email are required to reserve.</p>
   </div>
 
 </main>
@@ -1036,6 +1045,87 @@ const state = {
 
 const AFFILIATE_MAX = 10;
 
+/* ─── PRICING CONFIG ─── */
+const ACADEMY_PRICE = 29;
+const AFFILIATE_UNIT = 2;
+
+function issueDiscount() {
+  if (state.issues === 3) return 0.10;
+  if (state.issues === 6) return 0.15;
+  return 0;
+}
+
+function adTotal() {
+  const base = state.ad.price * state.issues;
+  return Math.round(base * (1 - issueDiscount()));
+}
+
+function calcTotal() {
+  let t = 0;
+  if (state.ad.price > 0) t += adTotal();
+  if (state.sponsor.price > 0) t += state.sponsor.price;
+  if (state.academy) t += ACADEMY_PRICE;
+  t += state.affiliate * AFFILIATE_UNIT;
+  return t;
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function updateReview() {
+  const total = calcTotal();
+  document.getElementById('masthead-total').textContent = fmt(total);
+  const hasAd = state.ad.price > 0;
+  const hasName = document.getElementById('f-name').value.trim().length > 0;
+  const email = document.getElementById('f-email').value.trim();
+  const hasEmail = isValidEmail(email);
+  const enabled = hasAd && hasName && hasEmail;
+  document.getElementById('btn-review-top').disabled    = !enabled;
+  document.getElementById('btn-review-bottom').disabled = !enabled;
+  // subtle email hint
+  const emailInput = document.getElementById('f-email');
+  if (email && !hasEmail) {
+    emailInput.style.borderColor = 'var(--burgundy)';
+  } else {
+    emailInput.style.borderColor = '';
+  }
+}
+
+/* ─── THEME TOGGLE ─── */
+function initTheme() {
+  const saved = localStorage.getItem('anna-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+  updateThemeBtn(theme);
+}
+function updateThemeBtn(theme) {
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = theme === 'dark' ? '☾' : '☀';
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('anna-theme', next);
+  updateThemeBtn(next);
+}
+
+/* ─── TOAST ─── */
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--espresso);color:var(--gold);padding:12px 20px;border-radius:8px;font-size:13px;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  setTimeout(() => { t.style.opacity = '0'; }, 2200);
+}
+
 /* ─── CARD SELECTION ─── */
 function selectCard(card, group) {
   const grid = document.getElementById(group + '-grid') ||
@@ -1057,17 +1147,6 @@ function setIssues(n) {
   state.issues = n;
   updateSavingsLabel();
   updateReview();
-}
-
-function issueDiscount() {
-  if (state.issues === 3) return 0.10;
-  if (state.issues === 6) return 0.15;
-  return 0;
-}
-
-function adTotal() {
-  const base = state.ad.price * state.issues;
-  return Math.round(base * (1 - issueDiscount()));
 }
 
 function updateSavingsLabel() {
@@ -1104,25 +1183,8 @@ function changeAffiliate(delta) {
 }
 
 /* ─── TOTALS ─── */
-function calcTotal() {
-  let t = adTotal() + state.sponsor.price;
-  if (state.academy) t += 29;
-  t += state.affiliate * 2;
-  return t;
-}
-
 function fmt(n) {
   return '$' + n.toLocaleString('en-US');
-}
-
-function updateReview() {
-  const total = calcTotal();
-  document.getElementById('masthead-total').textContent = fmt(total);
-  const hasAd = state.ad.price > 0;
-  const hasName = document.getElementById('f-name').value.trim().length > 0;
-  const enabled = hasAd && hasName;
-  document.getElementById('btn-review-top').disabled    = !enabled;
-  document.getElementById('btn-review-bottom').disabled = !enabled;
 }
 
 /* ─── INVOICE MODAL ─── */
@@ -1150,7 +1212,7 @@ function openInvoice() {
     lines.push({
       name: 'Anna Co-op Academy',
       detail: 'Monthly membership',
-      amt: 29,
+      amt: ACADEMY_PRICE,
     });
   }
   if (state.mia) {
@@ -1164,7 +1226,7 @@ function openInvoice() {
     lines.push({
       name: `Affiliate Copies — ${state.affiliate} copies`,
       detail: '$2 per copy / issue',
-      amt: state.affiliate * 2,
+      amt: state.affiliate * AFFILIATE_UNIT,
     });
   }
 
@@ -1209,12 +1271,7 @@ function openInvoice() {
 }
 
 function calcInvoiceTotal() {
-  let t = 0;
-  if (state.ad.price > 0)      t += adTotal();
-  if (state.sponsor.price > 0) t += state.sponsor.price;
-  if (state.academy)            t += 29;
-  t += state.affiliate * 2;
-  return t;
+  return calcTotal(); // MIA is free; unified calculation
 }
 
 function closeInvoice() {
@@ -1255,7 +1312,7 @@ function copyOrder() {
   if (state.mia)
     txt += `  • MIA Gift Box Sponsorship — TBD\n`;
   if (state.affiliate > 0)
-    txt += `  • Affiliate Copies: ${state.affiliate} copies — ${fmt(state.affiliate * 2)}/issue\n`;
+    txt += `  • Affiliate Copies: ${state.affiliate} copies — ${fmt(state.affiliate * AFFILIATE_UNIT)}/issue\n`;
 
   txt += `\nTotal due: ${fmt(calcInvoiceTotal())}\n`;
   if (notes) txt += `\nNotes: ${notes}\n`;
@@ -1264,8 +1321,9 @@ function copyOrder() {
   navigator.clipboard.writeText(txt).then(() => {
     const btn = document.querySelector('.btn-copy');
     btn.textContent = '✓ Copied!';
+    showToast('Order copied — open Square and paste the amount');
     setTimeout(() => { btn.textContent = '📋 Copy itemized order'; }, 2000);
-  });
+  }).catch(() => showToast('Could not copy — please select and copy manually'));
 }
 
 
@@ -1411,6 +1469,7 @@ updateReview = function() {
 loadState();
 
 // init
+initTheme();
 updateReview();
 </script>
 </body>
