@@ -463,9 +463,13 @@ footer a { color: var(--gold); text-decoration: none; }
         <input type="checkbox" name="book_call" id="book_call" value="Yes — book a 20-min call" checked>
         <div>
           <div class="book-call-label">Book a 20-minute call with Anna Co-op</div>
-          <div class="book-call-sub">Aubre' will reach out to find a time that works for you.</div>
+          <div class="book-call-sub">Pick a time on Calendly, or call / text 972-837-3179. Replies go to PRESS@annaartscouncil.org.</div>
         </div>
       </label>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+        <a id="calendly-btn" href="https://calendly.com/annaartscouncil/20min" target="_blank" rel="noopener" class="btn-submit" style="text-decoration:none; display:inline-block; padding:12px 22px; font-size:14px;">Book on Calendly →</a>
+        <a href="tel:9728373179" style="text-decoration:none; display:inline-block; text-align:center; padding:12px 18px; border:1.5px solid var(--border); border-radius:10px; color:var(--fg); font-weight:600; font-size:14px;">Call 972-837-3179</a>
+      </div>
       <div class="form-group full" style="margin-top:16px;">
         <label class="form-label" for="notes">Anything else you'd like us to know?</label>
         <textarea class="form-input" id="notes" name="notes" placeholder="Goals, questions, preferred times, or context for the call…"></textarea>
@@ -481,8 +485,12 @@ footer a { color: var(--gold); text-decoration: none; }
 
   <div class="success" id="success">
     <h2>You're in.</h2>
-    <p>Thank you — we received your details. Aubre' will reach out within one business day to book your 20-minute call and share anything you asked about.</p>
-    <a href="mailto:hello@annaartscouncil.org">Email Aubre' directly</a>
+    <p>Thank you — your details went to PRESS@annaartscouncil.org. Book your 20-minute call now, or call / text 972-837-3179.</p>
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <a id="success-calendly" href="https://calendly.com/annaartscouncil/20min" target="_blank" rel="noopener">Book a 20-min call on Calendly</a>
+      <a href="tel:9728373179">Call 972-837-3179</a>
+      <a href="mailto:PRESS@annaartscouncil.org">Email PRESS@</a>
+    </div>
   </div>
 </main>
 
@@ -539,7 +547,7 @@ footer a { color: var(--gold); text-decoration: none; }
 
 <footer>
   <strong>Anna Co-op Magazine</strong> · Published by Anna Arts Council · Anna, Texas 75409<br>
-  A 501(c)(3) nonprofit · EIN 39-3158761 · <a href="mailto:hello@annaartscouncil.org">hello@annaartscouncil.org</a><br>
+  A 501(c)(3) nonprofit · EIN 39-3158761 · <a href="mailto:PRESS@annaartscouncil.org">PRESS@annaartscouncil.org</a> · <a href="tel:9728373179">972-837-3179</a><br>
   <a href="#our-process">Our Process</a> &nbsp;·&nbsp; All ads are Anna-only. Art by local artists. Stories from Anna voices.<br>
   <span style="color: rgba(250,247,242,0.3); font-size: 11px;">Anna Co-op · Town Square Apps LLC</span>
 </footer>
@@ -549,7 +557,10 @@ footer a { color: var(--gold); text-decoration: none; }
 <script>
 const STORAGE_KEY = 'anna-coop-lead-draft';
 const LOG_KEY = 'anna-coop-lead-log';
-const FORM_ENDPOINT = 'https://formsubmit.co/ajax/hello@annaartscouncil.org';
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/PRESS@annaartscouncil.org';
+const CALENDLY_URL = 'https://calendly.com/annaartscouncil/20min';
+const PRESS_PHONE = '972-837-3179';
+const PRESS_EMAIL = 'PRESS@annaartscouncil.org';
 
 function initTheme() {
   const saved = localStorage.getItem('anna-theme');
@@ -676,6 +687,8 @@ document.getElementById('lead-form').addEventListener('submit', async (e) => {
   const payload = {
     _subject: `New Anna Co-op lead: ${data.business}`,
     _template: 'table',
+    _replyto: data.email,
+    _cc: 'PRESS@annaartscouncil.org',
     business: data.business,
     owner: data.owner,
     phone: data.phone || '',
@@ -785,6 +798,7 @@ function changeAffiliate(delta) {
   saveDraft();
 }
 
+document.querySelectorAll('#calendly-btn, #success-calendly').forEach(a => { if (a) a.href = CALENDLY_URL; });
 initTheme();
 loadDraft();
 </script>
